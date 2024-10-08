@@ -1,0 +1,37 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "standard-with-typescript",
+        "plugin:promise/recommended"
+    ],
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "@typescript-eslint/indent": ["error", 4],
+        "@typescript-eslint/space-before-function-paren": "off",
+        "no-console": "warn",
+        "promise/always-return": "off",
+        "multiline-ternary": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
+}

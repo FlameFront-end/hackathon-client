@@ -1,0 +1,42 @@
+
+
+{
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["node"],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "*": ["*"],
+      "@/components/*": ["src/components/*"],
+      "@/core/*": ["src/core/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/globalTypes": ["src/types/global.types.ts"],
+      "@/pathsConfig": ["src/router/entities/paths.config.ts"],
+      "@/hooks": ["src/hooks"],
+      "@/store": ["src/store"],
+      "@/strapi": ["src/features/strapi/hooks"],
+      "@/entities": ["src/entities"],
+    }
+  },
+    "include": ["src/**/*", "**/*.ts", "**/*.tsx", "./src/types/api/collections.d.ts"],
+    "exclude": ["node_modules", "public"],
+    "references": [{ "path": "./tsconfig.node.json" }]
+}
