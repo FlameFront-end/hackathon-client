@@ -2,8 +2,7 @@ import { useState, useCallback, useRef, type FC, type CSSProperties } from 'reac
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
 
-import { SvgArrowDown, SvgArrowUp } from '../../kit/components/Svg'
-import { Counter, Header, MainButton } from '@/features/kit'
+import { Counter, Header, MainButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
 
 const Speed: FC = () => {
     const [mainButtonName, setMainButtonName] = useState('Начать')
@@ -43,12 +42,12 @@ const Speed: FC = () => {
             const cfDn = speedTest.results.getDownloadBandwidth()
             const cfUp = speedTest.results.getUploadBandwidth()
 
-            // console.log('speedTest.results', {
-            //     cfJitt,
-            //     cfPing,
-            //     cfDn,
-            //     cfUp
-            // })
+            console.log('speedTest.results', {
+                cfJitt,
+                cfPing,
+                cfDn,
+                cfUp
+            })
 
             if (cfPing) {
                 setPing(Math.round(cfPing * 10) / 10)

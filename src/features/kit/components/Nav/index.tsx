@@ -1,8 +1,8 @@
 import { type FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { SvgGeodata, SvgMap, SvgSpeed } from '../Svg'
+
 import { NavStyledWrapper } from './Nav.styled.tsx'
-import { pathsConfig } from '../../../../router/entities/paths.config.ts'
+import { SvgGeodata, SvgMap, SvgSpeed } from '../Svg'
 
 const Nav: FC = () => {
     const loc = useLocation()
@@ -10,7 +10,7 @@ const Nav: FC = () => {
 
     return (
         <NavStyledWrapper>
-            <Link to={pathsConfig.speed} className={`link ${locName === 'speed' ? 'active' : ''}`}
+            <Link to='/speed' className={`link ${locName === 'speed' ? 'active' : ''}`}
                 data-type='speed'>
                 <div className='bg'></div>
                 <div className='content'>
@@ -18,7 +18,7 @@ const Nav: FC = () => {
                 </div>
             </Link>
 
-            <Link to={pathsConfig.map} className={`link ${locName === 'map' ? 'active' : ''}`}
+            <Link to='/map' className={`link ${locName === 'map' ? 'active' : ''}`}
                 data-type='map'>
                 <div className='bg'></div>
                 <div className='content'>
@@ -26,7 +26,7 @@ const Nav: FC = () => {
                 </div>
             </Link>
 
-            <Link to={pathsConfig.geoData} className={`link ${locName === 'geoData' ? 'active' : ''}`}
+            <Link to='/geodata' className={`link ${locName === 'geodata' ? 'active' : ''}`}
                 data-type='geodata'>
                 <div className='bg'></div>
                 <div className='content'>
