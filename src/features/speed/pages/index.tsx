@@ -1,11 +1,9 @@
 import { useState, useCallback, useRef, type FC, type CSSProperties } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
-import Index from '../../kit/components/Header'
-import Counter from '../../kit/components/Counter/Counter.tsx'
-import Index from '../../kit/components/Buttons/MainButton'
 
 import { SvgArrowDown, SvgArrowUp } from '../../kit/components/Svg'
+import { Counter, Header, MainButton } from '@/features/kit'
 
 const Speed: FC = () => {
     const [mainButtonName, setMainButtonName] = useState('Начать')
@@ -45,12 +43,12 @@ const Speed: FC = () => {
             const cfDn = speedTest.results.getDownloadBandwidth()
             const cfUp = speedTest.results.getUploadBandwidth()
 
-            console.log('speedTest.results', {
-                cfJitt,
-                cfPing,
-                cfDn,
-                cfUp
-            })
+            // console.log('speedTest.results', {
+            //     cfJitt,
+            //     cfPing,
+            //     cfDn,
+            //     cfUp
+            // })
 
             if (cfPing) {
                 setPing(Math.round(cfPing * 10) / 10)
@@ -84,7 +82,7 @@ const Speed: FC = () => {
 
     return (
         <SpeedStyledWrapper>
-            <Index subheading="Измерение скорости" />
+            <Header subheading="Измерение скорости" />
             <div className='top'>
                 <div className='column'>
                     <SvgArrowDown />
@@ -132,9 +130,9 @@ const Speed: FC = () => {
                 </div>
 
             </div>
-            <Index className='btn_wrapper' onClick={mainButtonFunc}>
+            <MainButton className='btn_wrapper' onClick={mainButtonFunc}>
                 {mainButtonName}
-            </Index>
+            </MainButton>
         </SpeedStyledWrapper>
     )
 }
