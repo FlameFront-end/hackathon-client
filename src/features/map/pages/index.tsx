@@ -27,8 +27,8 @@ const Map: FC = () => {
 
         map.current = new maplibregl.Map({
             container: mapContainer.current,
-            style: `https://api.maptiler.com/maps/basic-v2/style.json?key=${API_KEY}`,
-            center: [10, 10],
+            style: `https://api.maptiler.com/maps/basic-v2-dark/style.json?key=${API_KEY}`,
+            center: [54.5149, 36.2634],
             zoom
         })
     }, [API_KEY, zoom])
@@ -43,6 +43,7 @@ const Map: FC = () => {
     const handleButtonClick = (): void => {
         if (userLocation) {
             map.current?.setCenter(userLocation)
+            map.current?.setZoom(15)
         }
     }
 
