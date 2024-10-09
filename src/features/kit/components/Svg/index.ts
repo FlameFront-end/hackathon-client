@@ -1,4 +1,3 @@
-export { default as SvgArrowUp } from './arrowUp'
 export { default as SvgArrowDown } from './arrowDown'
 export { default as SvgMap } from './map'
 export { default as SvgSpeed } from './speed'

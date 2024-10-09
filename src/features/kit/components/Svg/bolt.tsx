@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-const bolt: FC = () => {
+const SvgBolt: FC = () => {
     return (
         <>
             <svg
@@ -21,4 +21,4 @@ const bolt: FC = () => {
     )
 }
 
-export default bolt
+export default SvgBolt

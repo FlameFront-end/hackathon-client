@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-const chatBar: FC = () => {
+const SvgChatBar: FC = () => {
     return (
         <>
             <svg
@@ -20,4 +20,4 @@ const chatBar: FC = () => {
         </>
     )
 }
-export default chatBar
+export default SvgChatBar

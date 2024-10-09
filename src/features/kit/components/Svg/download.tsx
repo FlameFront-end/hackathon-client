@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 
-const download: FC = () => {
+const SvgDownload: FC = () => {
     return (
         <>
             <svg
@@ -22,4 +22,4 @@ const download: FC = () => {
     )
 }
 
-export default download
+export default SvgDownload

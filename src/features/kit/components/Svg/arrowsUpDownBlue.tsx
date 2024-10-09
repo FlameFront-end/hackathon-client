@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-const arrowsUpDownBlue: FC = () => {
+const SvgArrowsUpDownBlue: FC = () => {
     return (
         <>
             <svg
@@ -20,4 +20,4 @@ const arrowsUpDownBlue: FC = () => {
         </>
     )
 }
-export default arrowsUpDownBlue
+export default SvgArrowsUpDownBlue

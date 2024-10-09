@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-const ArrowDown: FC = () => {
+const SvgArrowDown: FC = () => {
     return (
         <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -19,4 +19,4 @@ const ArrowDown: FC = () => {
     )
 }
 
-export default ArrowDown
+export default SvgArrowDown

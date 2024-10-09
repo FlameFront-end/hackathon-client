@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-const map: FC = () => {
+const SvgMap: FC = () => {
     return (
         <>
             <svg
@@ -35,4 +35,4 @@ const map: FC = () => {
     )
 }
 
-export default map
+export default SvgMap
