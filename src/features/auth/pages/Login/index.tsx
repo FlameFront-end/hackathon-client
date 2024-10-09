@@ -1,16 +1,18 @@
 import { type FC, useEffect } from 'react'
-import { Button, Form, Input } from 'antd'
-import { useLoginMutation } from '../../api/auth.api'
-import type { LoginPayload } from '../../types/login.types'
-import { regExpPassword } from '../../../../utils/regExp.ts'
-import { useAppAction } from '../../../../hooks/useAppAction.ts'
-import TextButton from '../../../kit/components/Buttons/TextButton'
 import { useNavigate } from 'react-router-dom'
-import { authPaths } from '../../routes/auth.paths.ts'
-import Card from '../../../kit/components/Card'
-import { StyledAuthWrapper } from '../styled/Auth.styled.tsx'
-import axios from 'axios'
 import { toast } from 'react-toastify'
+import axios from 'axios'
+import { Button, Form, Input } from 'antd'
+
+import type { LoginPayload } from '../../types/login.types'
+
+import { regExpPassword } from '@/utils'
+import { useAppAction } from '@/hooks'
+import { TextButton, Card } from '@/features/kit'
+import { useLoginMutation } from '../../api/auth.api'
+import { authPaths } from '../../routes/auth.paths.ts'
+
+import { StyledAuthWrapper } from '../styled/Auth.styled.tsx'
 
 const Login: FC = () => {
     const navigate = useNavigate()

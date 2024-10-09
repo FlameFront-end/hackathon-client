@@ -1,6 +1,7 @@
 import { type FC } from 'react'
-import { useAuth } from '../../../auth/hooks/useAuth.ts'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '@/hooks'
+import { useAuth } from '../../../auth/hooks/useAuth.ts'
 import { HomeOutlined } from '@ant-design/icons'
 
 import {
@@ -11,7 +12,6 @@ import {
     LogoutButton,
     LogoutButtonLabel
 } from './Sidebar.styled.tsx'
-import { useAppSelector } from '../../../../hooks/useAppSelector.ts'
 
 const Sidebar: FC = () => {
     const { logout } = useAuth()

@@ -1,12 +1,13 @@
 import { type FC } from 'react'
-import { Avatar } from 'antd'
-import ava from '../../../../../public/ava.png'
-import { useAppSelector } from '../../../../hooks/useAppSelector.ts'
-import TextButton from '../Buttons/TextButton'
-import { getFullName } from '../../../../utils/getFullName.ts'
-import { StyledMainHeader } from './MainHeader.styled.tsx'
 import { Link, useNavigate } from 'react-router-dom'
-import { pathsConfig } from '../../../../router/entities/paths.config.ts'
+import { Avatar } from 'antd'
+import { useAppSelector } from '@/hooks'
+import { TextButton } from '@/features/kit'
+import { getFullName } from '@/utils/getFullName.ts'
+import { pathsConfig } from '@/pathsConfig'
+import ava from '@/public/ava.png'
+
+import { StyledMainHeader } from './MainHeader.styled.tsx'
 
 const MainHeader: FC = () => {
     const navigate = useNavigate()
