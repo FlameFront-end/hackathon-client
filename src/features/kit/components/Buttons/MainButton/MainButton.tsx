@@ -12,7 +12,9 @@ interface Props {
 const MainButton: FC<Props> = ({ color, className, isMain, onClick, children }) => {
     return (
         <MainButtonStyledWrapper className={isMain ? 'main' : className}>
-            <button style={{ background: color }} onClick={onClick}>{children}</button>
+            <button style={{ background: color }} onClick={onClick}>
+                {children}
+            </button>
         </MainButtonStyledWrapper>
     )
 }

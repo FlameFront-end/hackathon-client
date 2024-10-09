@@ -14,6 +14,7 @@ import 'antd/dist/reset.css'
 import 'react-toastify/dist/ReactToastify.css'
 import '@coreui/coreui/dist/css/coreui.min.css'
 import './assets/css/scrollbar.css'
+import './assets/css/global.css'
 
 import 'dayjs/locale/ru.js'
 
@@ -32,4 +33,3 @@ root.render(
         </ThemeProvider>
     </Provider>
 )
-

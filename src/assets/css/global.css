@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+:root {
+  --head-size: 30px;
+  --subhead-size: 20px;
+  --base-size: 16px;
+}
+
+main {
+  view-transition-name: main;
+}
+
+::view-transition-old(main),
+::view-transition-new(main) {
+  animation-duration: .33s;
+}
+
+
+html {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: var(--base-size);
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  font-family: Noto Sans, sans-serif;
+}
+
+body {
+  height: 100vh;
+  color: white;
+  background: #191919;
+  display: flex;
+  flex-direction: column;
+}
+
+#map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: -1 }
+
+#map > div.maplibregl-control-container > div.maplibregl-ctrl-top-right > div:nth-child(2) {
+  display: none;
+}
+
+.maplibregl-ctrl-top-right {
+  top: 168px !important;
+}
+.maplibregl-ctrl-bottom-left {
+  bottom: 66px !important;
+}

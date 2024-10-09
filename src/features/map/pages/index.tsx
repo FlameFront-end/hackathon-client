@@ -53,7 +53,7 @@ const Map: FC = () => {
                     {/* <SvgChartBar /> */}
                     <div className='text'>
                         <h3 className='title'>
-							Мощность <span>-77 Дб</span>
+                            Мощность <span>-77 Дб</span>
                         </h3>
                     </div>
                 </div>
@@ -61,14 +61,14 @@ const Map: FC = () => {
                     {/* <SvgArrowsUpDownBlue /> */}
                     <div className='text'>
                         <h3 className='title'>
-							До вышки <span>100 м</span>
+                            До вышки <span>100 м</span>
                         </h3>
                     </div>
                 </div>
             </div>
             <MainButton onClick={handleButtonClick} isMain color="#279AED">
                 {/* <SvgLocation /> */}
-				Где я?
+                Где я?
             </MainButton>
         </MapStyledWrapper>
     )

@@ -1,4 +1,4 @@
-import { useState, useCallback, type FC, type CSSProperties } from 'react'
+import { useState, useCallback, useRef, type FC, type CSSProperties } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
 import Index from '../../kit/components/Header'
@@ -9,12 +9,13 @@ import { SvgArrowDown, SvgArrowUp } from '../../kit/components/Svg'
 
 const Speed: FC = () => {
     const [mainButtonName, setMainButtonName] = useState('Начать')
-    const [downloadSpeed, setDownloadSpeed] = useState(0)
-    const [uploadSpeed, setUploadSpeed] = useState(0)
-    const [downloadSpeedOld, setDownloadSpeedOld] = useState(0)
-    const [uploadSpeedOld, setUploadSpeedOld] = useState(0)
     const [ping, setPing] = useState(0)
     const [jitter, setJitter] = useState(0)
+    const downloadSpeed = useRef(0)
+    const uploadSpeed = useRef(0)
+    const downloadSpeedOld = useRef(0)
+    const uploadSpeedOld = useRef(0)
+    const intervalId = useRef<number | null>(null)
 
     const range = (
         value: number,
@@ -34,11 +35,22 @@ const Speed: FC = () => {
         setMainButtonName('Остановить')
         const speedTest = new SpeedTest()
 
-        const intervalId = setInterval(() => {
+        if (intervalId.current) {
+            clearInterval(intervalId.current)
+        }
+
+        intervalId.current = window.setInterval(() => {
             const cfJitt = speedTest.results.getUnloadedJitter()
             const cfPing = speedTest.results.getUnloadedLatency()
             const cfDn = speedTest.results.getDownloadBandwidth()
             const cfUp = speedTest.results.getUploadBandwidth()
+
+            console.log('speedTest.results', {
+                cfJitt,
+                cfPing,
+                cfDn,
+                cfUp
+            })
 
             if (cfPing) {
                 setPing(Math.round(cfPing * 10) / 10)
@@ -50,23 +62,25 @@ const Speed: FC = () => {
 
             if (cfDn) {
                 const newDownloadSpeed = Math.round(
-                    (lerp(downloadSpeedOld, Math.round(cfDn / 100000) / 10, 0.01)) * 100
+                    (lerp(downloadSpeedOld.current, Math.round(cfDn / 100000) / 10, 0.01)) * 100
                 ) / 100
-                setDownloadSpeed(newDownloadSpeed)
-                setDownloadSpeedOld(newDownloadSpeed)
+                downloadSpeed.current = newDownloadSpeed
+                downloadSpeedOld.current = newDownloadSpeed
             }
 
             if (cfUp) {
                 const newUploadSpeed = Math.round(
-                    (lerp(uploadSpeedOld, Math.round(cfUp / 100000) / 10, 0.01)) * 100
+                    (lerp(uploadSpeedOld.current, Math.round(cfUp / 100000) / 10, 0.01)) * 100
                 ) / 100
-                setUploadSpeed(newUploadSpeed)
-                setUploadSpeedOld(newUploadSpeed)
+                uploadSpeed.current = newUploadSpeed
+                uploadSpeedOld.current = newUploadSpeed
             }
-        }, 22)
+        }, 1)
 
-        return () => { clearInterval(intervalId) }
-    }, [downloadSpeedOld, uploadSpeedOld, lerp])
+        return () => {
+            if (intervalId.current) clearInterval(intervalId.current)
+        }
+    }, [lerp])
 
     return (
         <SpeedStyledWrapper>
@@ -76,18 +90,18 @@ const Speed: FC = () => {
                     <SvgArrowDown />
                     <div className='text'>
                         <h3 className='title'>
-                            Загрузка <span>Мбит/с</span>
+                          Загрузка <span>Мбит/с</span>
                         </h3>
-                        <div className='num'>{downloadSpeed}</div>
+                        <div className='num'>{downloadSpeed.current}</div>
                     </div>
                 </div>
                 <div className='column'>
                     <SvgArrowUp />
                     <div className='text'>
                         <h3 className='title'>
-                            Отдача <span>Мбит/с</span>
+                          Отдача <span>Мбит/с</span>
                         </h3>
-                        <div className='num'>{uploadSpeed}</div>
+                        <div className='num'>{uploadSpeed.current}</div>
                     </div>
                 </div>
             </div>
@@ -99,7 +113,7 @@ const Speed: FC = () => {
                     className='gauge'
                     style={{
                         '--ang': `${range(
-                            (uploadSpeed === 0 && downloadSpeed) || uploadSpeed,
+                            (uploadSpeed.current === 0 && downloadSpeed.current) || uploadSpeed.current,
                             0,
                             100,
                             0,
@@ -109,10 +123,10 @@ const Speed: FC = () => {
                 >
                     <div className='circle'>
                         <div className='num'>
-                            {(uploadSpeed === 0 && downloadSpeed) || uploadSpeed}
+                            {(uploadSpeed.current === 0 && downloadSpeed.current) || uploadSpeed.current}
                         </div>
                         <div className='name'>
-                            {(uploadSpeed === 0 && 'Загрузка') || 'Отдача'}
+                            {(uploadSpeed.current === 0 && 'Загрузка') || 'Отдача'}
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const NavStyled = styled.nav`
+export const NavStyledWrapper = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -9,7 +9,7 @@ export const NavStyled = styled.nav`
 
     position: fixed;
     bottom: 0;
-    /* padding: 35px 0; */
+     padding: 35px 0;
     overflow: hidden;
     background-color: #191919;
 
@@ -53,7 +53,7 @@ export const NavStyled = styled.nav`
         width: 20px;
         height: 20px;
 
-        background: #494949;
+        background: var(--grad);
 
         transition: opacity .5s ease,
         width 1s cubic-bezier(.26, .84, .21, .97),
@@ -66,8 +66,8 @@ export const NavStyled = styled.nav`
 
 
     .link.active .bg {
-        width: 15px;
-        height: 15px;
+        width: calc(16px * 7);
+        height: calc(16px * 7);
         opacity: 1;
     }
 
