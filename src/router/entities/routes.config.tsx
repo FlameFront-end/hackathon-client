@@ -3,6 +3,9 @@ import Layout from '../../containers/Layout'
 import { authRoutes } from '../../features/auth/routes/auth.routes.tsx'
 import { pathsConfig } from './paths.config.ts'
 import RouterProtect from '../RouterProtect.tsx'
+import { mapRoutes } from '../../features/map/routes/map.routes.tsx'
+import { speedRoutes } from '../../features/speed/routes/speed.routes.tsx'
+import { geoDataRoutes } from '../../features/geoData/routes/geoData.routes.tsx'
 
 export const routesConfig = [
     {
@@ -15,7 +18,10 @@ export const routesConfig = [
                 // защищённые роуты
                 children: []
             },
-            ...authRoutes
+            ...authRoutes,
+            ...mapRoutes,
+            ...speedRoutes,
+            ...geoDataRoutes
         ]
     }
 ]
