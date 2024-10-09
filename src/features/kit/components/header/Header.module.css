@@ -1,0 +1,14 @@
+.header {
+  padding: 17px;
+  background: rgba(34, 34, 34, 0.95);
+  backdrop-filter: blur(6px);
+}
+
+.heading {
+  font-size: var(--head-size);
+}
+
+.subheading {
+  font-size: var(--subhead-size);
+  color: #999;
+}
