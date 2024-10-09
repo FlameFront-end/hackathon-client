@@ -9,7 +9,6 @@ const SpeedometerCanvas: FC<Props> = ({ value }) => {
     const animationRef = useRef<number | null>(null)
     const currentValueRef = useRef<number>(0)
 
-    // Массив значений скоростей для каждой секции
     const speedMarks = [
         { speed: 1, angle: (3 * Math.PI) / 4 }, // 1 Мбит/с
         { speed: 5, angle: Math.PI }, // 5 Мбит/с
@@ -20,7 +19,7 @@ const SpeedometerCanvas: FC<Props> = ({ value }) => {
         { speed: 75, angle: (9 * Math.PI) / 4 } // 75 Мбит/с
     ]
 
-    const drawSpeedometer = (ctx: CanvasRenderingContext2D, value: number) => {
+    const drawSpeedometer = (ctx: CanvasRenderingContext2D, value: number): void => {
         const width = ctx.canvas.width
         const height = ctx.canvas.height
         const radius = Math.min(width, height) / 2 - 40
@@ -38,7 +37,7 @@ const SpeedometerCanvas: FC<Props> = ({ value }) => {
 
         // Найти нижнюю и верхнюю метки для текущего значения скорости
         const lowerMark = speedMarks.reduce((prev, curr) => (curr.speed <= value ? curr : prev))
-        const upperMark = speedMarks.find((mark) => mark.speed >= value) || speedMarks[speedMarks.length - 1]
+        const upperMark = speedMarks.find((mark) => mark.speed >= value) ?? speedMarks[speedMarks.length - 1]
 
         // Рассчитываем угол для текущего значения скорости
         const angleRange = upperMark.angle - lowerMark.angle
@@ -76,7 +75,7 @@ const SpeedometerCanvas: FC<Props> = ({ value }) => {
         ctx.fillText(value === 0 ? 'Загрузка' : 'Отдача', centerX, centerY + 20)
     }
 
-    const animate = (ctx: CanvasRenderingContext2D, targetValue: number) => {
+    const animate = (ctx: CanvasRenderingContext2D, targetValue: number): void => {
         const currentValue = currentValueRef.current
         const delta = targetValue - currentValue
         const step = delta * 0.1
