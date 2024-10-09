@@ -3,10 +3,10 @@ import { Avatar } from 'antd'
 import ava from '../../../../../public/ava.png'
 import { useAppSelector } from '../../../../hooks/useAppSelector.ts'
 import TextButton from '../Buttons/TextButton'
-import { getFullName } from '../../../../utils/getFullName.ts'
+import { getFullName } from '@/utils/getFullName.ts'
 import { StyledMainHeader } from './MainHeader.styled.tsx'
 import { Link, useNavigate } from 'react-router-dom'
-import { pathsConfig } from '../../../../router/entities/paths.config.ts'
+import { pathsConfig } from '@/pathsConfig'
 
 const MainHeader: FC = () => {
     const navigate = useNavigate()

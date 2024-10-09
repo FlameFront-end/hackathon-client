@@ -1,73 +1,84 @@
 import { type FC, useEffect, useRef, useState } from 'react'
-import * as maptilersdk from '@maptiler/sdk'
 import { Header, MainButton, SvgArrowsUpDownBlue, SvgChartBar, SvgLocation } from '@/features/kit'
-
+import maplibregl, { type Map as MapLibreMap } from 'maplibre-gl'
 import { MapStyledWrapper } from './Map.styled.tsx'
-import '@maptiler/sdk/dist/maptiler-sdk.css'
+import useGeoLocation from '../../../hooks/useGeoLocation.ts'
+
+import 'maplibre-gl/dist/maplibre-gl.css'
 
 const Map: FC = () => {
+    const API_KEY = 'yqVm8spL8ehikMLKrXJI'
+
     const mapContainer = useRef<HTMLDivElement | null>(null)
-    const [userLocation, setUserLocation] = useState<maptilersdk.LngLat>(
-        new maptilersdk.LngLat(36.262724, 54.517791)
-    )
+    const map = useRef<MapLibreMap | null>(null)
+    const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
+    const [zoom] = useState<number>(10)
+
+    const location = useGeoLocation()
 
     useEffect(() => {
-        maptilersdk.config.apiKey = 'U5L9BK8UnH7C2pZKrTlG'
-
-        const map = new maptilersdk.Map({
-            container: mapContainer.current as HTMLElement,
-            style: 'streets-v2-dark',
-            center: [36.2754, 54.5293],
-            zoom: 10
-        })
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const location = new maptilersdk.LngLat(
-                    position.coords.longitude,
-                    position.coords.latitude
-                )
-                setUserLocation(location)
-                new maptilersdk.Marker().setLngLat(location).addTo(map)
-            })
+        if (location.coordinates.lng && location.coordinates.lat) {
+            setUserLocation([location.coordinates.lng, location.coordinates.lat])
         }
+    }, [location])
 
-        new maptilersdk.Marker().setLngLat(userLocation).addTo(map)
-    }, [userLocation])
+    useEffect(() => {
+        if (map.current ?? mapContainer.current === null) return
+
+        map.current = new maplibregl.Map({
+            container: mapContainer.current,
+            style: `https://api.maptiler.com/maps/basic-v2/style.json?key=${API_KEY}`,
+            center: [10, 10],
+            zoom
+        })
+    }, [API_KEY, zoom])
+
+    useEffect(() => {
+        if (map.current && userLocation) {
+            map.current.setCenter(userLocation)
+            new maplibregl.Marker().setLngLat(userLocation).addTo(map.current)
+        }
+    }, [map.current, userLocation])
 
     const handleButtonClick = (): void => {
-        const geoButton = document.querySelector(
-            '#map > div.maplibregl-control-container > div.maplibregl-ctrl-top-right > div:nth-child(2) > button > span'
-        )
-        const buttonElement = geoButton as HTMLButtonElement
-        if (buttonElement) buttonElement.click()
+        if (userLocation) {
+            map.current?.setCenter(userLocation)
+        }
     }
 
     return (
         <MapStyledWrapper>
-            <div id="map" className='map' ref={mapContainer}></div>
-            <Header subheading="Карта качества связи" />
+            <Header subheading="Карта качества связи"/>
             <div className='top'>
                 <div className='column'>
-                    <SvgChartBar />
+                    <SvgChartBar/>
                     <div className='text'>
                         <h3 className='title'>
-                            Мощность <span>-77 Дб</span>
+                          Мощность <span>-77 Дб</span>
                         </h3>
                     </div>
                 </div>
                 <div className='column'>
-                    <SvgArrowsUpDownBlue />
+                    <SvgArrowsUpDownBlue/>
                     <div className='text'>
                         <h3 className='title'>
-                            До вышки <span>100 м</span>
+                          До вышки <span>100 м</span>
                         </h3>
                     </div>
                 </div>
             </div>
+            <div>
+                <div
+                    ref={mapContainer}
+                    style={{
+                        width: '100%',
+                        height: '80vh'
+                    }}
+                />
+            </div>
             <MainButton onClick={handleButtonClick} isMain color="#279AED">
                 <SvgLocation />
-                Где я?
+              Где я?
             </MainButton>
         </MapStyledWrapper>
     )
