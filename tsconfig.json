@@ -23,15 +23,14 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "*": ["*"],
-      "@/components/*": ["components/*"],
       "@/features/kit": ["features/kit/components"],
       "@/core/*": ["core/*"],
-      "@/utils/*": ["utils/*"],
-      "@/globalTypes": ["types/global.types.ts"],
-      "@/pathsConfig": ["router/entities/paths.config.ts"],
+      "@/utils": ["utils"],
       "@/hooks": ["hooks"],
       "@/store": ["store"],
       "@/entities": ["entities"],
+      "@/globalTypes": ["types/global.types.ts"],
+      "@/pathsConfig": ["router/entities/paths.config.ts"],
     }
   },
     "include": ["src/**/*", "**/*.ts", "**/*.tsx", "./src/types/api/collections.d.ts"],
