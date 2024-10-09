@@ -1,39 +1,43 @@
-import { component$ } from '@builder.io/qwik'
-import { Link, useLocation } from '@builder.io/qwik-city'
+import { type FC } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+// import { SvgGeodata, SvgMap, SvgSpeed } from '~/components/Svg'
 
-import { SvgGeodata, SvgMap, SvgSpeed } from '~/components/Svg'
+import './Nav.styled.tsx'
 
-import s from './Nav.module.css'
-
-export const Nav = component$(() => {
+export const Nav: FC = () => {
     const loc = useLocation()
     const locName = loc.url.pathname.split('/')[1]
 
     return (
-        <nav className={s.nav}>
-            <Link href='/speed' class={[s.link, locName == 'speed' && s.active]} data-type='speed'>
-                <div className={s.bg}></div>
-                <div className={s.content}>
-                    <SvgSpeed />
+        <nav className='nav'>
+            <Link to='/speed' className={['link', locName === 'speed' && 'active']} data-type='speed'>
+                <div className='bg'></div>
+                <div className='content'>
+                    {/* <SvgSpeed /> */}
+                    {/* eslint-disable-next-line no-tabs */}
 					Скорость
                 </div>
             </Link>
 
-            <Link href='/map' class={[s.link, locName === 'map' && s.active]} data-type='map'>
-                <div className={s.bg}></div>
-                <div className={s.content}>
-                    <SvgMap />
+            <Link to='/map' className={['link', locName === 'map' && 'active']} data-type='map'>
+                <div className='bg'></div>
+                <div className='content'>
+                    {/* <SvgMap /> */}
+                    {/* eslint-disable-next-line no-tabs */}
 					Карта
                 </div>
             </Link>
 
-            <Link href='/geodata' class={[s.link, locName == 'geodata' && s.active]} data-type='geodata'>
-                <div className={s.bg}></div>
-                <div className={s.content}>
-                    <SvgGeodata />
+            <Link to='/geodata' className={['link', locName === 'geodata' && 'active']} data-type='geodata'>
+                <div className='bg'></div>
+                <div className='content'>
+                    {/* <SvgGeodata /> */}
+                    {/* eslint-disable-next-line no-tabs */}
 					Геоданные
                 </div>
             </Link>
         </nav>
     )
-})
+}
+
+export default Nav

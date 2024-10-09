@@ -1,18 +1,17 @@
-import { component$ } from '@builder.io/qwik'
-
-import s from './Header.module.css'
+import { type FC } from 'react'
+import './Header.styled.tsx'
 
 interface HeaderProps {
     subheading: string
 }
 
-const Header = component$<HeaderProps>(props => {
+const Header: FC<HeaderProps> = ({ subheading }) => {
     return (
-        <header className={s.header}>
+        <header className='header'>
             <h1 className='heading'>Алё, Калуга!</h1>
-            <div className={s.subheading}>{props.subheading}</div>
+            <div className='subheading'>{subheading}</div>
         </header>
     )
-})
+}
 
 export default Header

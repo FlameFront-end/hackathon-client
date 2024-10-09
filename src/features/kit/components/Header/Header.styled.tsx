@@ -8,4 +8,8 @@ export const HeaderStyledWrapper = styled.div`
     .heading {
         font-size: 14px;
     }
+    .subheading {
+        font-size: 14px;
+        color: #999;
+    }
 `
