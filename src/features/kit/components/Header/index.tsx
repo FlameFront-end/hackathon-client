@@ -1,17 +1,17 @@
 import { type FC } from 'react'
-import './Header.styled.tsx'
+import { HeaderStyledWrapper } from './Header.styled.tsx'
 
 interface HeaderProps {
     subheading: string
 }
 
-const Header: FC<HeaderProps> = ({ subheading }) => {
+const Index: FC<HeaderProps> = ({ subheading }) => {
     return (
-        <header className='header'>
+        <HeaderStyledWrapper>
             <h1 className='heading'>Алё, Калуга!</h1>
             <div className='subheading'>{subheading}</div>
-        </header>
+        </HeaderStyledWrapper>
     )
 }
 
-export default Header
+export default Index

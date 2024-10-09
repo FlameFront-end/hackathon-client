@@ -1,7 +1,7 @@
 import { useState, useCallback, type FC, type CSSProperties } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
-import Header from '../../kit/components/header/Header.tsx'
+import Index from '../../kit/components/Header'
 import Counter from '../../kit/components/Counter/Counter.tsx'
 import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
 
@@ -68,7 +68,7 @@ const Speed: FC = () => {
 
     return (
         <SpeedStyledWrapper>
-            <Header subheading="Измерение скорости" />
+            <Index subheading="Измерение скорости" />
             <div className='top'>
                 <div className='column'>
                     {/* <SvgArrowDown /> */}

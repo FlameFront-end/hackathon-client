@@ -1,12 +1,12 @@
 import { type FC } from 'react'
-import Header from '../../kit/components/header/Header.tsx'
+import Index from '../../kit/components/Header'
 import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
 import { GeoDataStyledWrapper } from './GeoData.styled.tsx'
 
 const GeoData: FC = () => {
     return (
         <GeoDataStyledWrapper>
-            <Header subheading='Геоданные и измерения' />
+            <Index subheading='Геоданные и измерения' />
             <div className='geodata'>
                 <h2 className='heading'>
                     GeoData <span>RFC 5870</span>

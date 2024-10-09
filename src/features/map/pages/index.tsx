@@ -1,7 +1,7 @@
 import { type FC, useEffect, useRef, useState } from 'react'
 import * as maptilersdk from '@maptiler/sdk'
 import { MapStyledWrapper } from './Map.styled.tsx'
-import Header from '../../kit/components/header/Header.tsx'
+import Index from '../../kit/components/Header'
 import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
 
 import '@maptiler/sdk/dist/maptiler-sdk.css'
@@ -47,7 +47,7 @@ const Map: FC = () => {
     return (
         <MapStyledWrapper>
             <div id="map" className='map' ref={mapContainer}></div>
-            <Header subheading="Карта качества связи" />
+            <Index subheading="Карта качества связи" />
             <div className='top'>
                 <div className='column'>
                     {/* <SvgChartBar /> */}
