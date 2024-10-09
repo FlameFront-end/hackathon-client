@@ -6,14 +6,11 @@
   --base-size: 16px;
 }
 
-main {
-  view-transition-name: main;
+
+.test {
+  transform: rotate(-0.435turn);
 }
 
-::view-transition-old(main),
-::view-transition-new(main) {
-  animation-duration: .33s;
-}
 
 
 html {

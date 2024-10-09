@@ -1,8 +1,8 @@
-import { useState, useCallback, useRef, type FC, type CSSProperties } from 'react'
+import { useState, useCallback, useRef, type FC } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
-
 import { Counter, Header, MainButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
+import SpeedometerCanvas from '../components/SpeedometerCanvas.tsx'
 
 const Speed: FC = () => {
     const [mainButtonName, setMainButtonName] = useState('Начать')
@@ -14,15 +14,15 @@ const Speed: FC = () => {
     const uploadSpeedOld = useRef(0)
     const intervalId = useRef<number | null>(null)
 
-    const range = (
-        value: number,
-        low1: number,
-        high1: number,
-        low2: number,
-        high2: number
-    ): number => {
-        return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1)
-    }
+    // const range = (
+    //     value: number,
+    //     low1: number,
+    //     high1: number,
+    //     low2: number,
+    //     high2: number
+    // ): number => {
+    //     return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1)
+    // }
 
     const lerp = useCallback((start: number, end: number, time: number): number => {
         return start + time * (end - start)
@@ -41,13 +41,6 @@ const Speed: FC = () => {
             const cfPing = speedTest.results.getUnloadedLatency()
             const cfDn = speedTest.results.getDownloadBandwidth()
             const cfUp = speedTest.results.getUploadBandwidth()
-
-            console.log('speedTest.results', {
-                cfJitt,
-                cfPing,
-                cfDn,
-                cfUp
-            })
 
             if (cfPing) {
                 setPing(Math.round(cfPing * 10) / 10)
@@ -106,28 +99,7 @@ const Speed: FC = () => {
                 <Counter jitter={jitter} ping={ping} />
             </div>
             <div className='speedometer'>
-                <div
-                    className='gauge'
-                    style={{
-                        '--ang': `${range(
-                            (uploadSpeed.current === 0 && downloadSpeed.current) || uploadSpeed.current,
-                            0,
-                            100,
-                            0,
-                            270
-                        )}deg`
-                    } as CSSProperties}
-                >
-                    <div className='circle'>
-                        <div className='num'>
-                            {(uploadSpeed.current === 0 && downloadSpeed.current) || uploadSpeed.current}
-                        </div>
-                        <div className='name'>
-                            {(uploadSpeed.current === 0 && 'Загрузка') || 'Отдача'}
-                        </div>
-                    </div>
-                </div>
-
+                <SpeedometerCanvas value={uploadSpeed.current || downloadSpeed.current} />
             </div>
             <MainButton className='btn_wrapper' onClick={mainButtonFunc}>
                 {mainButtonName}

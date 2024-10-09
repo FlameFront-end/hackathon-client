@@ -55,8 +55,9 @@ export const SpeedStyledWrapper = styled.div`
         align-items: center;
         width: 300px;
         height: 300px;
-        background: conic-gradient(from -130deg, rgba(60, 56, 86, 1), rgba(216, 105, 255, 1) var(--ang), #222 calc(var(--ang) + .1deg));
+        background: conic-gradient(from -130deg, rgba(60, 56, 86, 1), rgba(216, 105, 255, 1) var(--ang), #222 calc(var(--ang) + 0.1deg));
         border-radius: 9999px;
+        clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
     }
 
     .circle {
@@ -99,7 +100,7 @@ export const SpeedStyledWrapper = styled.div`
             border: 1px solid #686868;
             box-shadow: 0px 0px 2px 0px #3939396e;
             transition: 0.3s;
-            
+
             &:hover {
                 box-shadow: 0px 0px 10px 0px #686868;
             }
