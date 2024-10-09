@@ -1,7 +1,7 @@
 import { type JSX } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { FloatButton } from 'antd'
-import { pathsConfig } from './entities/paths.config.ts'
+import { pathsConfig } from '@/pathsConfig'
 import { useAuth } from '../features/auth/hooks/useAuth'
 import Nav from '../features/kit/components/Nav'
 
@@ -14,7 +14,7 @@ const RouterProtect = (): JSX.Element => {
     // }
 
     if (isAuth && (pathname === pathsConfig.login)) {
-        return <Navigate to={pathsConfig.root} replace />
+        return <Navigate to={pathsConfig.speed} replace />
     }
 
     return (

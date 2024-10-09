@@ -1,3 +1,3 @@
 export const speedPaths = {
-    speed: '/speed'
+    speed: '/'
 }

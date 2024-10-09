@@ -1,7 +1,7 @@
 import NotFound404 from '../../pages/NotFound404'
 import Layout from '../../containers/Layout'
 import { authRoutes } from '../../features/auth/routes/auth.routes.tsx'
-import { pathsConfig } from './paths.config.ts'
+import { pathsConfig } from '@/pathsConfig'
 import RouterProtect from '../RouterProtect.tsx'
 import { mapRoutes } from '../../features/map/routes/map.routes.tsx'
 import { speedRoutes } from '../../features/speed/routes/speed.routes.tsx'
@@ -13,15 +13,15 @@ export const routesConfig = [
         errorElement: <NotFound404 />,
         children: [
             {
-                path: pathsConfig.root,
+                path: pathsConfig.speed,
                 element: <Layout />,
-                // защищённые роуты
-                children: []
-            },
-            ...authRoutes,
-            ...mapRoutes,
-            ...speedRoutes,
-            ...geoDataRoutes
+                children: [
+                    ...speedRoutes,
+                    ...authRoutes,
+                    ...mapRoutes,
+                    ...geoDataRoutes
+                ]
+            }
         ]
     }
 ]

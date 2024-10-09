@@ -1,6 +1,13 @@
 import { type FC } from 'react'
 import { GeoDataStyledWrapper } from './GeoData.styled.tsx'
-import { Header } from '@/features/kit'
+import {
+    Header,
+    MainButton,
+    SvgArrowsUpDownBlue,
+    SvgArrowsUpDownOrange,
+    SvgChartBar,
+    SvgDownload, SvgUpdate
+} from '@/features/kit'
 
 const GeoData: FC = () => {
     return (
@@ -20,19 +27,19 @@ const GeoData: FC = () => {
                 </a>
                 <div className='card_block'>
                     <div className='card'>
-                        {/* <SvgChartBar /> */}
+                        <SvgChartBar />
                         <div className='text'>
                             Мощность <span>-77 Дб</span>
                         </div>
                     </div>
                     <div className='card'>
-                        {/* <SvgArrowsUpDownOrange /> */}
+                        <SvgArrowsUpDownOrange />
                         <div className='text'>
                             Задержка <span>~3 ms</span>
                         </div>
                     </div>
                     <div className='card'>
-                        {/* <SvgArrowsUpDownBlue /> */}
+                        <SvgArrowsUpDownBlue />
                         <div className='text'>
                             До вышки <span>100 м</span>
                         </div>
@@ -49,16 +56,16 @@ const GeoData: FC = () => {
                             <span className='right'>21500</span>
                         </div>
                     </div>
-                    <Index color='#786c5a' onClick={() => { console.log('Скачать архив') }}>
-                        {/* <SvgDownload /> */}
+                    <MainButton color='#786c5a' onClick={() => { console.log('Скачать архив') }}>
+                        <SvgDownload />
                         Скачать архив
-                    </Index>
+                    </MainButton>
                 </div>
 
-                <Index isMain color='#B462F5' onClick={() => { console.log('Обновить') }}>
-                    {/* <SvgUpdate /> */}
+                <MainButton isMain color='#B462F5' onClick={() => { console.log('Обновить') }}>
+                    <SvgUpdate />
                     Обновить
-                </Index>
+                </MainButton>
             </div>
         </GeoDataStyledWrapper>
     )

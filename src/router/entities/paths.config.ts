@@ -4,9 +4,8 @@ import { speedPaths } from '../../features/speed/routes/speed.paths.ts'
 import { geoDataPaths } from '../../features/geoData/routes/geoData.paths.ts'
 
 export const pathsConfig = {
-    root: '/',
+    ...speedPaths,
     ...authPaths,
     ...mapPaths,
-    ...speedPaths,
     ...geoDataPaths
 }

@@ -1,9 +1,9 @@
-import { speedPaths } from './speed.paths.ts'
 import Speed from '../pages'
+import { pathsConfig } from '@/pathsConfig'
 
 export const speedRoutes = [
     {
-        path: speedPaths.speed,
+        path: pathsConfig.speed,
         element: <Speed />
     }
 ]
