@@ -24,6 +24,7 @@
     "paths": {
       "*": ["*"],
       "@/components/*": ["src/components/*"],
+      "@/features/kit": ["./features/kit/components/index.ts"],
       "@/core/*": ["src/core/*"],
       "@/utils/*": ["src/utils/*"],
       "@/globalTypes": ["src/types/global.types.ts"],

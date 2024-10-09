@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const SpeedStyledWrapper = styled.div`
+    height: 100vh;
+
     .middle {
         display: flex;
         justify-content: space-evenly;
@@ -42,7 +44,7 @@ export const SpeedStyledWrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 36px ;
+        padding: 0 36px;
     }
 
     .gauge {
@@ -80,8 +82,27 @@ export const SpeedStyledWrapper = styled.div`
         font-weight: 400;
     }
 
-    .btn_wrapper{
+    .btn_wrapper {
         display: flex;
+        width: 100%;
+        height: 150px;
         justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+
+        & button {
+            width: 250px;
+            height: 80px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 50px;
+            border: 1px solid #686868;
+            box-shadow: 0px 0px 2px 0px #3939396e;
+            transition: 0.3s;
+            
+            &:hover {
+                box-shadow: 0px 0px 10px 0px #686868;
+            }
+        }
     }
 `

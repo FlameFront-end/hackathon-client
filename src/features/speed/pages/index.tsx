@@ -5,6 +5,8 @@ import Index from '../../kit/components/Header'
 import Counter from '../../kit/components/Counter/Counter.tsx'
 import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
 
+import { SvgArrowDown, SvgArrowUp } from '../../kit/components/Svg'
+
 const Speed: FC = () => {
     const [mainButtonName, setMainButtonName] = useState('Начать')
     const [downloadSpeed, setDownloadSpeed] = useState(0)
@@ -71,7 +73,7 @@ const Speed: FC = () => {
             <Index subheading="Измерение скорости" />
             <div className='top'>
                 <div className='column'>
-                    {/* <SvgArrowDown /> */}
+                    <SvgArrowDown />
                     <div className='text'>
                         <h3 className='title'>
                             Загрузка <span>Мбит/с</span>
@@ -80,7 +82,7 @@ const Speed: FC = () => {
                     </div>
                 </div>
                 <div className='column'>
-                    {/* <SvgArrowUp /> */}
+                    <SvgArrowUp />
                     <div className='text'>
                         <h3 className='title'>
                             Отдача <span>Мбит/с</span>
@@ -116,7 +118,7 @@ const Speed: FC = () => {
                 </div>
 
             </div>
-            <MainButton isMain color="#545454" onClick={mainButtonFunc}>
+            <MainButton className='btn_wrapper' onClick={mainButtonFunc}>
                 {mainButtonName}
             </MainButton>
         </SpeedStyledWrapper>

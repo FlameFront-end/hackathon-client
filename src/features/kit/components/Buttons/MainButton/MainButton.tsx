@@ -6,11 +6,12 @@ interface Props {
     children: ReactNode
     color?: string
     isMain?: boolean
+    className?: string
 }
 
-const MainButton: FC<Props> = ({ color, isMain, onClick, children }) => {
+const MainButton: FC<Props> = ({ color, className, isMain, onClick, children }) => {
     return (
-        <MainButtonStyledWrapper className={isMain ? 'main' : ''}>
+        <MainButtonStyledWrapper className={isMain ? 'main' : className}>
             <button style={{ background: color }} onClick={onClick}>{children}</button>
         </MainButtonStyledWrapper>
     )
