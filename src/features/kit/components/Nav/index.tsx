@@ -27,8 +27,8 @@ const Nav: FC = () => {
                 </div>
             </Link>
 
-            <Link to={pathsConfig.geoData} className={`link ${locName === 'geoData' ? 'active' : ''}`}
-                data-type='geodata'>
+            <Link to={pathsConfig.geoData} className={`link ${locName === 'geo-data' ? 'active' : ''}`}
+                data-type='geo-data'>
                 <div className='bg'></div>
                 <div className='content'>
                     <SvgGeodata /> Геоданные

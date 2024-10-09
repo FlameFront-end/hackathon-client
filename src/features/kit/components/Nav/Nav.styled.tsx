@@ -32,7 +32,7 @@ export const NavStyledWrapper = styled.nav`
         --grad: linear-gradient(180deg, rgba(92, 138, 255, 0.24) 0%, rgba(89, 186, 99, 0.24) 100%);
     }
 
-    .link[data-type='geodata'] {
+    .link[data-type='geo-data'] {
         --grad: linear-gradient(180deg, rgba(255, 88, 88, 0.24) 0%, rgba(163, 74, 122, 0.24) 100%);
     }
 
