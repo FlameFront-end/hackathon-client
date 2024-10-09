@@ -1,17 +1,17 @@
 import { component$ } from '@builder.io/qwik'
-import { Link, useLocation } from '@builder.io/qwik-city'
 
 import { SvgGeodata, SvgMap, SvgSpeed } from '~/components/Svg'
 
 import s from './Nav.module.css'
+import { Link, useLocation } from 'react-router-dom'
 
 export const Nav = component$(() => {
     const loc = useLocation()
-    const locName = loc.url.pathname.split('/')[1]
+    const locName = loc.pathname.split('/')[1]
 
     return (
         <nav className={s.nav}>
-            <Link href='/speed' class={[s.link, locName == 'speed' && s.active]} data-type='speed'>
+            <Link to='/speed' class={[s.link, locName == 'speed' && s.active]} data-type='speed'>
                 <div className={s.bg}></div>
                 <div className={s.content}>
                     <SvgSpeed />
@@ -27,7 +27,7 @@ export const Nav = component$(() => {
                 </div>
             </Link>
 
-            <Link href='/geodata' class={[s.link, locName == 'geodata' && s.active]} data-type='geodata'>
+            <Link href='/geodata' class={[s.link, locName == 'geoData' && s.active]} data-type='geodata'>
                 <div className={s.bg}></div>
                 <div className={s.content}>
                     <SvgGeodata />
