@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from 'antd'
 import { useAppSelector } from '@/hooks'
 import { TextButton } from '@/features/kit'
-import { getFullName } from '@/utils/getFullName.ts'
+import { getFullName } from '@/utils'
 import { pathsConfig } from '@/pathsConfig'
-import ava from '@/public/ava.png'
+import ava from '../../../../../public/ava.png'
 
 import { StyledMainHeader } from './MainHeader.styled.tsx'
 
