@@ -1,6 +1,5 @@
-import { useState, useCallback, type FC } from 'react'
+import { useState, useCallback, type FC, type CSSProperties } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
-import s from './Speed.module.css'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
 import Header from '../../kit/components/header/Header.tsx'
 import Counter from '../../kit/components/Counter/Counter.tsx'
@@ -93,9 +92,9 @@ const Speed: FC = () => {
             <div className='speed'>
                 <Counter jitter={jitter} ping={ping} />
             </div>
-            <div className={s.speedometer}>
+            <div className='speedometer'>
                 <div
-                    className={s.gauge}
+                    className='gauge'
                     style={{
                         '--ang': `${range(
                             (uploadSpeed === 0 && downloadSpeed) || uploadSpeed,
@@ -104,17 +103,18 @@ const Speed: FC = () => {
                             0,
                             270
                         )}deg`
-                    }}
+                    } as CSSProperties}
                 >
-                    <div className={s.circle}>
-                        <div className={s.num}>
+                    <div className='circle'>
+                        <div className='num'>
                             {(uploadSpeed === 0 && downloadSpeed) || uploadSpeed}
                         </div>
-                        <div className={s.name}>
+                        <div className='name'>
                             {(uploadSpeed === 0 && 'Загрузка') || 'Отдача'}
                         </div>
                     </div>
                 </div>
+
             </div>
             <MainButton isMain color="#545454" onClick={mainButtonFunc}>
                 {mainButtonName}
