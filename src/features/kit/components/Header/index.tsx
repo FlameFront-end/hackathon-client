@@ -5,7 +5,7 @@ interface HeaderProps {
     subheading: string
 }
 
-const Index: FC<HeaderProps> = ({ subheading }) => {
+const Header: FC<HeaderProps> = ({ subheading }) => {
     return (
         <HeaderStyledWrapper>
             <h1 className='heading'>Алё, Калуга!</h1>
@@ -14,4 +14,4 @@ const Index: FC<HeaderProps> = ({ subheading }) => {
     )
 }
 
-export default Index
+export default Header

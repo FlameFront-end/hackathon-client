@@ -3,7 +3,7 @@ import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
 import Index from '../../kit/components/Header'
 import Counter from '../../kit/components/Counter/Counter.tsx'
-import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
+import Index from '../../kit/components/Buttons/MainButton'
 
 import { SvgArrowDown, SvgArrowUp } from '../../kit/components/Svg'
 
@@ -132,9 +132,9 @@ const Speed: FC = () => {
                 </div>
 
             </div>
-            <MainButton className='btn_wrapper' onClick={mainButtonFunc}>
+            <Index className='btn_wrapper' onClick={mainButtonFunc}>
                 {mainButtonName}
-            </MainButton>
+            </Index>
         </SpeedStyledWrapper>
     )
 }

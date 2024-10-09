@@ -12,11 +12,11 @@ const Counter: FC<Props> = ({ ping, jitter }) => {
         <CounterStyledWrapper>
             <div className='column'>
                 <SvgArrowsUpDownBlue/>
-					Разница <span>~{jitter} мс</span>
+              Разница <span>~{jitter} мс</span>
             </div>
             <div className='column'>
                 <SvgBolt/>
-				Задержка <span>{ping} мс</span>
+              Задержка <span>{ping} мс</span>
             </div>
         </CounterStyledWrapper>
     )

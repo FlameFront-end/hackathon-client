@@ -1,12 +1,11 @@
 import { type FC } from 'react'
-import Index from '../../kit/components/Header'
-import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
 import { GeoDataStyledWrapper } from './GeoData.styled.tsx'
+import { Header } from '@/features/kit'
 
 const GeoData: FC = () => {
     return (
         <GeoDataStyledWrapper>
-            <Index subheading='Геоданные и измерения' />
+            <Header subheading='Геоданные и измерения' />
             <div className='geodata'>
                 <h2 className='heading'>
                     GeoData <span>RFC 5870</span>
@@ -50,16 +49,16 @@ const GeoData: FC = () => {
                             <span className='right'>21500</span>
                         </div>
                     </div>
-                    <MainButton color='#786c5a' onClick={() => { console.log('Скачать архив') }}>
+                    <Index color='#786c5a' onClick={() => { console.log('Скачать архив') }}>
                         {/* <SvgDownload /> */}
                         Скачать архив
-                    </MainButton>
+                    </Index>
                 </div>
 
-                <MainButton isMain color='#B462F5' onClick={() => { console.log('Обновить') }}>
+                <Index isMain color='#B462F5' onClick={() => { console.log('Обновить') }}>
                     {/* <SvgUpdate /> */}
                     Обновить
-                </MainButton>
+                </Index>
             </div>
         </GeoDataStyledWrapper>
     )

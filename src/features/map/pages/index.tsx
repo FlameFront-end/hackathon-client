@@ -1,9 +1,8 @@
 import { type FC, useEffect, useRef, useState } from 'react'
 import * as maptilersdk from '@maptiler/sdk'
-import { MapStyledWrapper } from './Map.styled.tsx'
-import Index from '../../kit/components/Header'
-import MainButton from '../../kit/components/Buttons/MainButton/MainButton.tsx'
+import { Header, MainButton, SvgArrowsUpDownBlue, SvgChartBar, SvgLocation } from '@/features/kit'
 
+import { MapStyledWrapper } from './Map.styled.tsx'
 import '@maptiler/sdk/dist/maptiler-sdk.css'
 
 const Map: FC = () => {
@@ -47,10 +46,10 @@ const Map: FC = () => {
     return (
         <MapStyledWrapper>
             <div id="map" className='map' ref={mapContainer}></div>
-            <Index subheading="Карта качества связи" />
+            <Header subheading="Карта качества связи" />
             <div className='top'>
                 <div className='column'>
-                    {/* <SvgChartBar /> */}
+                    <SvgChartBar />
                     <div className='text'>
                         <h3 className='title'>
                             Мощность <span>-77 Дб</span>
@@ -58,7 +57,7 @@ const Map: FC = () => {
                     </div>
                 </div>
                 <div className='column'>
-                    {/* <SvgArrowsUpDownBlue /> */}
+                    <SvgArrowsUpDownBlue />
                     <div className='text'>
                         <h3 className='title'>
                             До вышки <span>100 м</span>
@@ -67,7 +66,7 @@ const Map: FC = () => {
                 </div>
             </div>
             <MainButton onClick={handleButtonClick} isMain color="#279AED">
-                {/* <SvgLocation /> */}
+                <SvgLocation />
                 Где я?
             </MainButton>
         </MapStyledWrapper>
