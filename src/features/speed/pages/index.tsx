@@ -47,8 +47,6 @@ const Speed: FC = () => {
         setIsTesting(false)
     }
 
-    console.log('isTesting', isTesting)
-
     return (
         <SpeedStyledWrapper>
             <Header subheading="Измерение скорости" />
