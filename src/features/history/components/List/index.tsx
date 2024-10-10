@@ -45,7 +45,7 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
                                 </div>
                             </div>
                             <div className='time'>
-                                <span>Дата измерения: {formatDate(item.time)}</span>
+                                <span>{formatDate(item.time)}</span>
                             </div>
                         </div>
                     </Skeleton>
