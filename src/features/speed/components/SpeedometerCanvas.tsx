@@ -2,21 +2,23 @@ import { type FC, useEffect, useRef } from 'react'
 
 interface Props {
     value: number
+    check: 'download' | 'upload'
+    isTesting: boolean
 }
 
-const SpeedometerCanvas: FC<Props> = ({ value }) => {
+const SpeedometerCanvas: FC<Props> = ({ value, check, isTesting }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const animationRef = useRef<number | null>(null)
     const currentValueRef = useRef<number>(0)
 
     const speedMarks = [
-        { speed: 1, angle: (3 * Math.PI) / 4 }, // 1 Мбит/с
-        { speed: 5, angle: Math.PI }, // 5 Мбит/с
-        { speed: 10, angle: (5 * Math.PI) / 4 }, // 10 Мбит/с
-        { speed: 20, angle: (6 * Math.PI) / 4 }, // 20 Мбит/с
-        { speed: 30, angle: (7 * Math.PI) / 4 }, // 30 Мбит/с
-        { speed: 50, angle: (8 * Math.PI) / 4 }, // 50 Мбит/с
-        { speed: 75, angle: (9 * Math.PI) / 4 } // 75 Мбит/с
+        { speed: 1, angle: (3 * Math.PI) / 4 },
+        { speed: 5, angle: Math.PI },
+        { speed: 10, angle: (5 * Math.PI) / 4 },
+        { speed: 30, angle: (6 * Math.PI) / 4 },
+        { speed: 50, angle: (7 * Math.PI) / 4 },
+        { speed: 75, angle: (8 * Math.PI) / 4 },
+        { speed: 120, angle: (9 * Math.PI) / 4 }
     ]
 
     const drawSpeedometer = (ctx: CanvasRenderingContext2D, value: number): void => {
@@ -66,13 +68,15 @@ const SpeedometerCanvas: FC<Props> = ({ value }) => {
         })
 
         // Текущая скорость в центре
-        ctx.beginPath()
-        ctx.fillStyle = 'white'
-        ctx.font = '32px Arial'
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'middle'
-        ctx.fillText(`${Math.round(value)} Мбит/с`, centerX, centerY - 15)
-        ctx.fillText(value === 0 ? 'Загрузка' : 'Отдача', centerX, centerY + 20)
+        if (isTesting) {
+            ctx.beginPath()
+            ctx.fillStyle = 'white'
+            ctx.font = '32px Arial'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            ctx.fillText(`${!Number.isNaN(Math.round(value)) ? Math.round(value) : 0} Мбит/с`, centerX, centerY - 15)
+            ctx.fillText(check === 'download' ? 'Загрузка' : 'Отдача', centerX, centerY + 20)
+        }
     }
 
     const animate = (ctx: CanvasRenderingContext2D, targetValue: number): void => {

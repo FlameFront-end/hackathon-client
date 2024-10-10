@@ -1,11 +1,11 @@
-import { type JSX } from 'react'
+import { type FC } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { FloatButton } from 'antd'
 import { pathsConfig } from '@/pathsConfig'
 import { useAuth } from '../features/auth/hooks/useAuth'
-import Nav from '../features/kit/components/Nav'
+import { Nav } from '@/features/kit'
 
-const RouterProtect = (): JSX.Element => {
+const RouterProtect: FC = () => {
     const { isAuth } = useAuth()
     const { pathname } = useLocation()
 
