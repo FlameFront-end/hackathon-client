@@ -34,15 +34,11 @@ body {
   flex-direction: column;
 }
 
-#map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: -1 }
 
-#map > div.maplibregl-control-container > div.maplibregl-ctrl-top-right > div:nth-child(2) {
-  display: none;
-}
-
-.maplibregl-ctrl-top-right {
-  top: 168px !important;
-}
-.maplibregl-ctrl-bottom-left {
-  bottom: 66px !important;
+.ymaps-layers-pane {
+  filter: grayscale(1) !important;
+  -ms-filter: grayscale(1) !important;
+  -webkit-filter: grayscale(1) !important;
+  -moz-filter: grayscale(1) !important;
+  -o-filter: grayscale(1) !important;
 }

@@ -1,4 +1,4 @@
-import { api } from '../../../core/api.ts'
+import { api } from '@/core/api.ts'
 import { type RegisterPayload } from '../types/register.types.ts'
 
 export const authApi = api.injectEndpoints({

@@ -1,13 +1,13 @@
 import { type FC, useEffect, useRef, useState } from 'react'
 import { Header, MainButton, SvgArrowsUpDownBlue, SvgChartBar, SvgLocation } from '@/features/kit'
 import maplibregl, { type Map as MapLibreMap } from 'maplibre-gl'
-import { MapStyledWrapper } from './Map.styled.tsx'
-import useGeoLocation from '../../../hooks/useGeoLocation.ts'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
-import fakeData from '../data/data.ts'
+import useGeoLocation from '../../../../hooks/useGeoLocation.ts'
+import fakeData from '../../data/data.ts'
+import { MapStyledWrapper } from '../Map.styled.tsx'
 
-const Map: FC = () => {
+const MapOld: FC = () => {
     const API_KEY = 'yqVm8spL8ehikMLKrXJI'
 
     const mapContainer = useRef<HTMLDivElement | null>(null)
@@ -24,14 +24,14 @@ const Map: FC = () => {
     }, [location])
 
     useEffect(() => {
-        if (map.current ?? mapContainer.current === null) return
-
-        map.current = new maplibregl.Map({
-            container: mapContainer.current,
-            style: `https://api.maptiler.com/maps/basic-v2-dark/style.json?key=${API_KEY}`,
-            center: [54.5149, 36.2634],
-            zoom
-        })
+        if (!map.current && mapContainer.current) {
+            map.current = new maplibregl.Map({
+                container: mapContainer.current,
+                style: `https://api.maptiler.com/maps/basic-v2-dark/style.json?key=${API_KEY}`,
+                center: [54.5149, 36.2634],
+                zoom
+            })
+        }
     }, [API_KEY, zoom])
 
     useEffect(() => {
@@ -39,40 +39,59 @@ const Map: FC = () => {
             map.current.setCenter(userLocation)
             new maplibregl.Marker().setLngLat(userLocation).addTo(map.current)
         }
-    }, [map.current, userLocation])
+    }, [userLocation])
 
     const handleButtonClick = (): void => {
-        if (userLocation) {
-            map.current?.setCenter(userLocation)
-            map.current?.setZoom(15)
+        if (userLocation && map.current) {
+            map.current.setCenter(userLocation)
+            map.current.setZoom(15)
         }
     }
 
     useEffect(() => {
-        fakeData.forEach((item) => {
-            if (map.current) {
-                new maplibregl.Marker().setLngLat(item.coordinates).addTo(map.current)
-            }
-        })
+        if (map.current) {
+            fakeData.forEach((item) => {
+                const el = document.createElement('div')
+                el.className = 'custom-marker'
+                el.style.backgroundColor = 'red'
+                el.style.width = '30px'
+                el.style.height = '30px'
+                el.style.borderRadius = '50%'
+                el.style.cursor = 'pointer' // Ensure marker is clickable
+
+                // Create marker for each item
+                const marker = new maplibregl.Marker(el)
+                    .setLngLat(item.coordinates)
+                    .addTo(map.current)
+
+                // Add click event to open popup
+                marker.getElement().addEventListener('click', () => {
+                    new maplibregl.Popup()
+                        .setLngLat(item.coordinates)
+                        .setHTML('1111')
+                        .addTo(map.current)
+                })
+            })
+        }
     }, [fakeData])
 
     return (
         <MapStyledWrapper>
-            <Header subheading="Карта качества связи"/>
+            <Header subheading="Карта качества связи" />
             <div className='top'>
                 <div className='column'>
-                    <SvgChartBar/>
+                    <SvgChartBar />
                     <div className='text'>
                         <h3 className='title'>
-                          Мощность <span>-77 Дб</span>
+              Мощность <span>-77 Дб</span>
                         </h3>
                     </div>
                 </div>
                 <div className='column'>
-                    <SvgArrowsUpDownBlue/>
+                    <SvgArrowsUpDownBlue />
                     <div className='text'>
                         <h3 className='title'>
-                          До вышки <span>100 м</span>
+              До вышки <span>100 м</span>
                         </h3>
                     </div>
                 </div>
@@ -89,10 +108,10 @@ const Map: FC = () => {
             </div>
             <MainButton onClick={handleButtonClick} isMain color="#279AED">
                 <SvgLocation />
-              Где я?
+        Где я?
             </MainButton>
         </MapStyledWrapper>
     )
 }
 
-export default Map
+export default MapOld

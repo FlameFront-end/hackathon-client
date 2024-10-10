@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 export const api = createApi({
     reducerPath: 'base',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3000',
+        baseUrl: 'https://hackathon-server-nest-production-0a0c.up.railway.app',
         prepareHeaders: (headers) => {
             const token = Cookies.get('token')
             if (token != null) {

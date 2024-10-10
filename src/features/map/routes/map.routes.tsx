@@ -1,5 +1,5 @@
 import { mapPaths } from './map.paths.ts'
-import Map from '../pages'
+import Map from '../pages/Map'
 
 export const mapRoutes = [
     {

@@ -23,5 +23,9 @@ export const MapStyledWrapper = styled.div`
         color: #999;
         font-size: 14px;
     }
-
+    
+    .ymap {
+        height: 80vh;
+        width: 100%;
+    }
 `
