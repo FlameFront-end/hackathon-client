@@ -69,6 +69,7 @@ const Map: FC = () => {
                 </div>
             </div>
             <div>
+                <button id="toggle-button">Hide</button>
                 <div
                     ref={mapContainer}
                     style={{
