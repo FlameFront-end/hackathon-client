@@ -16,7 +16,7 @@ interface DataType {
 }
 
 interface ListProps {
-    data: [DataType]
+    data: DataType[]
 }
 
 const App: FC<ListProps> = ({ data }) => {
@@ -40,9 +40,9 @@ const App: FC<ListProps> = ({ data }) => {
                             title={item.name?.title}
                             description={
                                 item.name?.text +
-                                ' downloadSpeed ' +
+                                ' загрузка ' +
                                 String(item.indicators.downloadSpeed) +
-                                ' uploadSpeed ' +
+                                ' отдача ' +
                                 String(item.indicators.uploadSpeed)
                             }
                         />

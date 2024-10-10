@@ -27,11 +27,11 @@ const Nav: FC = () => {
                 </div>
             </Link>
 
-            <Link to={pathsConfig.geoData} className={`link ${locName === 'geo-data' ? 'active' : ''}`}
-                data-type='geo-data'>
+            <Link to={pathsConfig.history} className={`link ${locName === 'history' ? 'active' : ''}`}
+                data-type='history'>
                 <div className='bg'></div>
                 <div className='content'>
-                    <SvgGeodata /> Геоданные
+                    <SvgGeodata /> История
                 </div>
             </Link>
         </NavStyledWrapper>

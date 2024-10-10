@@ -23,9 +23,12 @@ export const MapStyledWrapper = styled.div`
         color: #999;
         font-size: 14px;
     }
-    
-    .ymap {
-        height: 80vh;
-        width: 100%;
+
+    .ymaps-layers-pane {
+        filter: grayscale(1);
+        -ms-filter: grayscale(1);
+        -webkit-filter: grayscale(1);
+        -moz-filter: grayscale(1);
+        -o-filter: grayscale(1);
     }
 `
