@@ -17,4 +17,10 @@ declare namespace Collections {
         createdAt: string
         user?: Collections.User
     }
+
+    interface CreateHistoryPayload {
+        downloadSpeed: number
+        uploadSpeed: number
+        userId?: number
+    }
 }

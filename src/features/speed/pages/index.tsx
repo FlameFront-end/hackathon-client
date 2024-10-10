@@ -4,6 +4,8 @@ import { SpeedStyledWrapper } from './Speed.styled.tsx'
 import { Header, MainButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
 import SpeedometerCanvas from '../components/SpeedometerCanvas.tsx'
 import { Button, Modal } from 'antd'
+import { useCreateHistoryMutation } from '../../history/api/history.api.ts'
+import { toast } from 'react-toastify'
 
 const Speed: FC = () => {
     const [isTesting, setIsTesting] = useState<boolean>(false)
@@ -15,7 +17,9 @@ const Speed: FC = () => {
     const intervalDownloadId = useRef<number | null>(null)
     const intervalUploadId = useRef<number | null>(null)
 
-    const handleStart = (): void => {
+    const [createHistory] = useCreateHistoryMutation()
+
+    const handleStart = async (): Promise<void> => {
         setIsTesting(true)
         const speedTest = new SpeedTest()
 
@@ -33,12 +37,26 @@ const Speed: FC = () => {
         }, 20000)
 
         setTimeout(() => {
+            const finalDownloadSpeed = Math.round(speedTest?.results?.getDownloadBandwidth() as number / 1e6)
+            const finalUploadSpeed = Math.round(speedTest?.results?.getUploadBandwidth() as number / 1e6)
+
             speedTest.pause()
-            handleFinish()
+
+            console.log('finalDownloadSpeed', finalDownloadSpeed)
+
+            void createHistory({
+                downloadSpeed: finalDownloadSpeed,
+                uploadSpeed: finalUploadSpeed,
+                userId: 1
+            }).then(() => {
+                toast.success('История успешно сохранена')
+            })
+
+            void handleFinish()
         }, 40000)
     }
 
-    const handleFinish = (): void => {
+    const handleFinish = async (): Promise<void> => {
         if (intervalDownloadId.current) {
             clearInterval(intervalDownloadId.current)
         }

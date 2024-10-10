@@ -2,7 +2,7 @@ import { api } from '@/core/api.ts'
 
 export const historyApi = api.injectEndpoints({
     endpoints: builder => ({
-        createHistory: builder.mutation({
+        createHistory: builder.mutation<Collections.History[], Collections.CreateHistoryPayload>({
             query: (payload) => ({
                 url: '/history',
                 method: 'POST',
