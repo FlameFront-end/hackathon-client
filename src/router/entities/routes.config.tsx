@@ -5,7 +5,7 @@ import { pathsConfig } from '@/pathsConfig'
 import RouterProtect from '../RouterProtect.tsx'
 import { mapRoutes } from '../../features/map/routes/map.routes.tsx'
 import { speedRoutes } from '../../features/speed/routes/speed.routes.tsx'
-import { geoDataRoutes } from '../../features/geoData/routes/geoData.routes.tsx'
+import { historyRoutes } from '../../features/history/routes/history.routes.tsx'
 
 export const routesConfig = [
     {
@@ -19,7 +19,7 @@ export const routesConfig = [
                     ...speedRoutes,
                     ...authRoutes,
                     ...mapRoutes,
-                    ...geoDataRoutes
+                    ...historyRoutes
                 ]
             }
         ]
