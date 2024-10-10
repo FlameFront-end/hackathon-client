@@ -1,12 +1,12 @@
 import { type FC, useState } from 'react'
 import { Button, Form, Upload, Input, DatePicker, type UploadProps } from 'antd'
 import { useRegisterMutation } from '../../api/auth.api'
-import { regExpPassword } from '../../../../utils/regExp.ts'
-import { useAppAction } from '../../../../hooks/useAppAction.ts'
+import { regExpPassword } from '@/utils'
+import { useAppAction } from '@/hooks'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { type RegisterDataForm } from '../../types/register.types.ts'
 import { useNavigate } from 'react-router-dom'
-import { pathsConfig } from '../../../../router/entities/paths.config.ts'
+import { pathsConfig } from '@/pathsConfig'
 import Flex from '../../../kit/components/Flex'
 import TextButton from '../../../kit/components/Buttons/TextButton'
 import { authPaths } from '../../routes/auth.paths.ts'
@@ -32,7 +32,7 @@ const Register: FC = () => {
         if (!('error' in response)) {
             const result = response?.data
             setUser(result)
-            navigate(pathsConfig.root)
+            navigate(pathsConfig.speed)
             form.resetFields()
         }
     }

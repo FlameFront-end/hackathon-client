@@ -16,7 +16,7 @@ interface DataType {
 }
 
 interface ListProps {
-    data: []
+    data: [DataType]
 }
 
 const App: FC<ListProps> = ({ data }) => {
@@ -34,21 +34,18 @@ const App: FC<ListProps> = ({ data }) => {
             itemLayout="horizontal"
             dataSource={list}
             renderItem={(item) => (
-                <List.Item
-                    actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
-                >
+                <List.Item>
                     <Skeleton title={false} loading={item.loading} active>
                         <List.Item.Meta
                             title={item.name?.title}
                             description={
                                 item.name?.text +
                                 ' downloadSpeed ' +
-                                item.indicators.downloadSpeed +
+                                String(item.indicators.downloadSpeed) +
                                 ' uploadSpeed ' +
-                                item.indicators.uploadSpeed
+                                String(item.indicators.uploadSpeed)
                             }
                         />
-                        <div>content</div>
                     </Skeleton>
                 </List.Item>
             )}
