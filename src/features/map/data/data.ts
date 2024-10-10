@@ -1,111 +1,32 @@
-type interFakeData = Record<string, any>
+interface FakeDataItem {
+    coordinates: [number, number]
+    downloadSpeed: number
+    uploadSpeed: number
+    ping: number
+}
 
-const fakeData: interFakeData[] = [
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.552113, 36.219112]
-        },
-        net: {
-            downloadSpeed: 10,
-            uploadSpeed: 15,
-            ping: 2
-        }
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.539189, 36.260654]
-        },
-        net: {
-            downloadSpeed: 50,
-            uploadSpeed: 40,
-            ping: 1
-        }
+const generateFakeData = (numPoints: number): FakeDataItem[] => {
+    const fakeData: FakeDataItem[] = []
 
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.519422, 36.272439]
-        },
-        net: {
-            downloadSpeed: 40,
-            uploadSpeed: 30,
-            ping: 1
-        }
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.516162, 36.254207]
-        },
-        net: {
-            downloadSpeed: 40,
-            uploadSpeed: 30,
-            ping: 1
-        }
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.504075, 36.280359]
-        },
-        net: {
-            downloadSpeed: 40,
-            uploadSpeed: 30,
-            ping: 1
-        }
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.471641, 36.238854]
-        },
-        net: {
-            downloadSpeed: 40,
-            uploadSpeed: 30,
-            ping: 1
-        }
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.485036, 36.176541]
-        },
-        net: {
-            downloadSpeed: 40,
-            uploadSpeed: 30,
-            ping: 1
-        }
-    },
-    {
-        type: 'Feature',
-        properties: 'Feature properties',
-        geometry: {
-            type: 'Point',
-            coordinates: [54.468641, 36.272157]
-        },
-        net: {
-            downloadSpeed: 40,
-            uploadSpeed: 30,
-            ping: 1
-        }
+    for (let i = 0; i < numPoints; i++) {
+        const latitude = (Math.random() * (55.0 - 54.3) + 54.3).toFixed(6)
+        const longitude = (Math.random() * (37.0 - 35.5) + 35.5).toFixed(6)
+
+        const downloadSpeed = Math.floor(Math.random() * 100) + 1
+        const uploadSpeed = Math.floor(Math.random() * 50) + 1
+        const ping = Math.floor(Math.random() * 100)
+
+        fakeData.push({
+            coordinates: [parseFloat(latitude), parseFloat(longitude)],
+            downloadSpeed,
+            uploadSpeed,
+            ping
+        })
     }
-]
+
+    return fakeData
+}
+
+const fakeData = generateFakeData(10)
 
 export default fakeData

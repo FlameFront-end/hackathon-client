@@ -5,6 +5,7 @@ import { MapStyledWrapper } from './Map.styled.tsx'
 import useGeoLocation from '../../../hooks/useGeoLocation.ts'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
+import fakeData from '../data/data.ts'
 
 const Map: FC = () => {
     const API_KEY = 'yqVm8spL8ehikMLKrXJI'
@@ -46,6 +47,14 @@ const Map: FC = () => {
             map.current?.setZoom(15)
         }
     }
+
+    useEffect(() => {
+        fakeData.forEach((item) => {
+            if (map.current) {
+                new maplibregl.Marker().setLngLat(item.coordinates).addTo(map.current)
+            }
+        })
+    }, [fakeData])
 
     return (
         <MapStyledWrapper>
