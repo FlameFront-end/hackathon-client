@@ -1,15 +1,20 @@
 declare namespace Collections {
     interface User {
         id: number
-        patronymic: string | null
-        surname: string
+        nick: string
         name: string
         email: string
-        ava: string | null
-        isAdmin: boolean
         password: string
-        birthdate: string
         updatedAt: string
         createdAt: string
+    }
+
+    interface History {
+        id: number
+        downloadSpeed: number
+        uploadSpeed: number
+        coordinates: number[]
+        createdAt: string
+        user?: Collections.User
     }
 }
