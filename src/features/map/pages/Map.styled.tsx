@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 export const MapStyledWrapper = styled.div`
+    .ymaps-2-1-79-inner-panes {
+        //filter: grayscale(1);
+    }
+    
     .top {
         display: flex;
         justify-content: space-evenly;
