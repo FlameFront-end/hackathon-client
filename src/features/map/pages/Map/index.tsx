@@ -7,25 +7,23 @@ import useGeoLocation from '../../../../hooks/useGeoLocation.ts'
 
 const Map: FC = () => {
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
-    const [mapCenter, setMapCenter] = useState<[number, number]>([54.51, 36.26]) // Default to Kaluga
+    const [mapCenter, setMapCenter] = useState<[number, number]>([54.51, 36.26])
     const [zoom, setZoom] = useState<number>(13)
 
     const location = useGeoLocation()
 
     useEffect(() => {
-    // Update user location if coordinates are available
         if (location.coordinates.lng && location.coordinates.lat) {
             const newLocation: [number, number] = [location.coordinates.lat, location.coordinates.lng]
             setUserLocation(newLocation)
-            setMapCenter(newLocation) // Set the map center to user location
+            setMapCenter(newLocation)
         }
     }, [location])
 
     const getMyLocation = (): void => {
-    // Move the map to user location
         if (userLocation) {
             setMapCenter(userLocation)
-            setZoom(15) // Optionally adjust zoom level
+            setZoom(15)
         }
     }
 
@@ -50,8 +48,8 @@ const Map: FC = () => {
                     </div>
                 </div>
             </div>
-            <YMaps>
-                <Ymap className='ymap' state={{ center: mapCenter, zoom }}> {/* Use state prop instead of defaultState */}
+            <YMaps query={{ apikey: 'ee55b2db-9099-4f9f-bf10-d10079ebcb34' }}>
+                <Ymap className='ymap' state={{ center: mapCenter, zoom }}>
                     {userLocation && <Placemark geometry={userLocation} />}
 
                     {fakeData.map((item, index) => (
@@ -79,7 +77,7 @@ const Map: FC = () => {
             {userLocation !== null && (
                 <MainButton onClick={getMyLocation} isMain color="#279AED">
                     <SvgLocation />
-          Где я?
+                        Где я?
                 </MainButton>
             )}
         </MapStyledWrapper>

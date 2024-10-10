@@ -24,11 +24,8 @@ export const MapStyledWrapper = styled.div`
         font-size: 14px;
     }
 
-    .ymaps-layers-pane {
-        filter: grayscale(1);
-        -ms-filter: grayscale(1);
-        -webkit-filter: grayscale(1);
-        -moz-filter: grayscale(1);
-        -o-filter: grayscale(1);
+    .ymap {
+        height: 80vh;
+        width: 100%;
     }
 `
