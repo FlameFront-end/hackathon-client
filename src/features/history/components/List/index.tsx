@@ -36,16 +36,12 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
                         <div>
                             <div className='results'>
                                 <div>
-                                    <span>
-                                        <SvgArrowDown/> Загрузка
-                                    </span>
-                                    { String(item.indicators.downloadSpeed) }
+                                    <span><SvgArrowDown/> Загрузка</span>
+                                    {item.indicators.downloadSpeed} Мбит/с
                                 </div>
                                 <div>
-                                    <span>
-                                        <SvgArrowUp/> Отдача
-                                    </span>
-                                    { (item.indicators.uploadSpeed) }
+                                    <span><SvgArrowUp/> Отдача</span>
+                                    {item.indicators.uploadSpeed} Мбит/с
                                 </div>
                             </div>
                             <div className='time'>
