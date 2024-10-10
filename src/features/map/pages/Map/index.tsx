@@ -3,7 +3,7 @@ import { Header, MainButton, SvgArrowsUpDownBlue, SvgChartBar, SvgLocation } fro
 import { MapStyledWrapper } from '../Map.styled.tsx'
 import { YMaps, Map as Ymap, Placemark } from '@pbe/react-yandex-maps'
 import fakeData from '../../data/data.ts'
-import useGeoLocation from '../../../../hooks/useGeoLocation.ts'
+import { useGeoLocation } from '@/hooks'
 
 const Map: FC = () => {
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
@@ -48,7 +48,7 @@ const Map: FC = () => {
                     </div>
                 </div>
             </div>
-            <YMaps query={{ apikey: 'ee55b2db-9099-4f9f-bf10-d10079ebcb34' }}>
+            <YMaps query={{ apikey: 'ee55b2db-9099-4f9f-bf10-d10079ebcb34' }} >
                 <Ymap className='ymap' state={{ center: mapCenter, zoom }}>
                     {userLocation && <Placemark geometry={userLocation} />}
 
@@ -69,6 +69,10 @@ const Map: FC = () => {
                             options={{
                                 balloonCloseButton: true,
                                 hideIconOnBalloonOpen: false
+                                // iconLayout: 'default#image',
+                                // iconImageHref: '/pngwing.png',
+                                // iconImageSize: [30, 42],
+                                // iconImageOffset: [-3, -42]
                             }}
                         />
                     ))}

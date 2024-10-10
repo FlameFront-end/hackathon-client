@@ -32,7 +32,33 @@ const History: FC = () => {
                             uploadSpeed: 35,
                             ping: 1
                         },
-                        geoData: '1',
+                        geoData: '2',
+                        loading: false
+                    },
+                    {
+                        name: {
+                            title: 'Имя пользователя',
+                            text: 'название локации'
+                        },
+                        indicators: {
+                            downloadSpeed: 12,
+                            uploadSpeed: 35,
+                            ping: 1
+                        },
+                        geoData: '3',
+                        loading: false
+                    },
+                    {
+                        name: {
+                            title: 'Имя пользователя',
+                            text: 'название локации'
+                        },
+                        indicators: {
+                            downloadSpeed: 12,
+                            uploadSpeed: 35,
+                            ping: 1
+                        },
+                        geoData: '4',
                         loading: false
                     }
                 ]}/>

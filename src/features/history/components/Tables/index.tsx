@@ -1,5 +1,6 @@
 import { type FC, useEffect, useState } from 'react'
-import { List, Skeleton } from 'antd'
+import { Avatar, List, Skeleton } from 'antd'
+import { SvgArrowDown, SvgArrowUp } from '@/features/kit'
 
 interface DataType {
     name: {
@@ -12,6 +13,8 @@ interface DataType {
         ping: number
     }
     geoData?: string
+    time?: string
+    large?: string
     loading: boolean
 }
 
@@ -37,15 +40,31 @@ const App: FC<ListProps> = ({ data }) => {
                 <List.Item>
                     <Skeleton title={false} loading={item.loading} active>
                         <List.Item.Meta
+                            avatar={<Avatar src='../../../../../public/ava.png' />}
                             title={item.name?.title}
                             description={
-                                item.name?.text +
-                                ' загрузка ' +
-                                String(item.indicators.downloadSpeed) +
-                                ' отдача ' +
-                                String(item.indicators.uploadSpeed)
+                                item.name?.text
                             }
                         />
+                        <div>
+                            <div className='results'>
+                                <div>
+                                    <span>
+                                        <SvgArrowDown/> {' Загрузка '}
+                                    </span>
+                                    { String(item.indicators.downloadSpeed) }
+                                </div>
+                                <div>
+                                    <span>
+                                        <SvgArrowUp/> {' Отдача '}
+                                    </span>
+                                    { (item.indicators.uploadSpeed) }
+                                </div>
+                            </div>
+                            <div className='time'>
+                                <span>время: {item.time}</span>
+                            </div>
+                        </div>
                     </Skeleton>
                 </List.Item>
             )}
