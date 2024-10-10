@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from 'react'
 import { Header, MainButton, SvgArrowsUpDownBlue, SvgChartBar, SvgLocation } from '@/features/kit'
 import { MapStyledWrapper } from '../Map.styled.tsx'
-import { YMaps, Map as Ymap, Placemark } from '@pbe/react-yandex-maps'
+import { YMaps, Map as Ymap, Placemark, Circle } from '@pbe/react-yandex-maps'
 import fakeData from '../../data/data.ts'
 import { useGeoLocation } from '@/hooks'
 
@@ -76,6 +76,20 @@ const Map: FC = () => {
                             }}
                         />
                     ))}
+
+                    {fakeData.map((item, index) => (
+                        <Circle
+                            key={index}
+                            geometry={[item.coordinates, 10000]}
+                            options={{
+                                fillColor: '#DB709377',
+                                strokeColor: '#990066',
+                                strokeOpacity: 0.8,
+                                strokeWidth: 5
+                            }}
+                        />
+                    ))}
+
                 </Ymap>
             </YMaps>
             {userLocation !== null && (
