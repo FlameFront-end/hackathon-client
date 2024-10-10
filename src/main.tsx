@@ -10,6 +10,7 @@ import { store } from './store/configureStore.ts'
 import { theme } from './core/theme.ts'
 import { antdTheme } from './core/antdTheme.ts'
 
+import './assets/css/reset.css'
 import 'antd/dist/reset.css'
 import 'react-toastify/dist/ReactToastify.css'
 import '@coreui/coreui/dist/css/coreui.min.css'

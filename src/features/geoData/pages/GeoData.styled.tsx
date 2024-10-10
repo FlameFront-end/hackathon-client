@@ -3,10 +3,17 @@ import styled from 'styled-components'
 export const GeoDataStyledWrapper = styled.div`
     .geodata {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        flex-direction: row;
         align-items: start;
         padding: 40px 20px;
+    }
+    
+    .infa{
+        width: 450px;
+    }
+    
+    .bottom_App{
+        width: 100%;
     }
 
     .heading {
@@ -93,5 +100,6 @@ export const GeoDataStyledWrapper = styled.div`
         font-weight: 700;
         text-decoration-line: underline;
     }
-
+    
+    
 `

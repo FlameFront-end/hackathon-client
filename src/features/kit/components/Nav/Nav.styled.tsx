@@ -9,21 +9,24 @@ export const NavStyledWrapper = styled.nav`
 
     position: fixed;
     bottom: 0;
-     padding: 35px 0;
+    padding: 35px 0;
     overflow: hidden;
     background-color: #191919;
-
+    
     .link {
+        color: white; 
         position: relative;
         width: max(30%, 60px);
         height: 66px;
         font-weight: normal;
+        font-size: 16px;
+        text-decoration: none;
     }
 
     .link.active {
         font-weight: bold;
     }
-
+    
     .link[data-type='speed'] {
         --grad: linear-gradient(180deg, rgba(255, 87, 208, 0.24) 0%, rgba(116, 73, 208, 0.24) 100%)
     }
@@ -56,8 +59,8 @@ export const NavStyledWrapper = styled.nav`
         background: var(--grad);
 
         transition: opacity .5s ease,
-        width 1s cubic-bezier(.26, .84, .21, .97),
-        height 1s cubic-bezier(.26, .84, .21, .97);
+            width 1s cubic-bezier(.26, .84, .21, .97),
+            height 1s cubic-bezier(.26, .84, .21, .97);
 
         opacity: 0;
         border-radius: 9999px;
