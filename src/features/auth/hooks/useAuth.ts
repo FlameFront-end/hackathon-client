@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
-import { useAppAction } from '../../../hooks/useAppAction.ts'
-import { useAppSelector } from '../../../hooks/useAppSelector.ts'
+import { useAppSelector, useAppAction } from '@/hooks'
 
 interface UseAuthReturn {
     isAuth: boolean
@@ -14,7 +13,6 @@ export const useAuth = (): UseAuthReturn => {
     const logout = (): void => {
         removeUser()
         localStorage.clear()
-        location.reload()
     }
 
     return useMemo(() => ({ isAuth, logout }), [isAuth])
