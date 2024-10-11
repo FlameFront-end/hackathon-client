@@ -4,7 +4,7 @@ import { SvgArrowDown, SvgArrowUp } from '@/features/kit'
 import { formatDate } from '@/utils'
 
 interface DataType {
-    location: string
+    coordinates: number[]
     indicators: {
         downloadSpeed: number
         uploadSpeed: number
@@ -30,7 +30,7 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
                         <AntdList.Item.Meta
                             avatar={<Avatar size='large' src='../../../../../public/avaProfileWhite.svg' />}
                             title={item.userName ?? 'Аноним'}
-                            description={item.location}
+                            description={`${item.coordinates[0]} ${item.coordinates[1]}`}
                         />
                         <div className='block_result'>
                             <div className='results'>

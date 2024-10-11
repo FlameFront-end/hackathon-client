@@ -11,7 +11,7 @@ export const MapStyledWrapper = styled.div`
     .column {
         display: flex;
         gap: 8px;
-        align-items: end;
+        align-items: center;
     }
 
     .title {

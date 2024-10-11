@@ -24,7 +24,7 @@ const History: FC = () => {
                 {allHistory && <div className='history'>
                     <List isFetching={isFetching} data={allHistory.map((item) => ({
                         userName: item.user?.nick,
-                        location: 'название локации',
+                        coordinates: item.coordinates,
                         time: item.createdAt,
                         indicators: {
                             downloadSpeed: item.downloadSpeed,
@@ -36,7 +36,7 @@ const History: FC = () => {
                 {myHistory && <div className='history'>
                     <List isFetching={isFetchingMyHistory} data={myHistory.map((item) => ({
                         userName: item.user?.nick,
-                        location: 'название локации',
+                        coordinates: item.coordinates,
                         time: item.createdAt,
                         indicators: {
                             downloadSpeed: item.downloadSpeed,
