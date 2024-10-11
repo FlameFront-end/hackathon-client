@@ -6,13 +6,23 @@ import { useGetProfileQuery } from '../../auth/api/auth.api.ts'
 import { formatDate } from '@/utils'
 import Cookies from 'js-cookie'
 import QrCode from '../components/QrCode.tsx'
+import { TextButton } from '@/features/kit'
+import { useAuth } from '../../auth/hooks/useAuth.ts'
+import { pathsConfig } from '@/pathsConfig'
+import { useNavigate } from 'react-router-dom'
 
 const Profile: FC = () => {
     const { data: user, isFetching } = useGetProfileQuery(null)
 
     const token = Cookies.get('token')
-
     console.log('user', user)
+
+    const { logout } = useAuth()
+    const navigate = useNavigate()
+    const handleLogoutClick = (): void => {
+        navigate(pathsConfig.speed)
+        logout()
+    }
 
     return (
         <ProfileStyledWrapper>
@@ -41,6 +51,9 @@ const Profile: FC = () => {
                 </div>
                 <div className="qr-btn">
                     {token && <QrCode token={token}/>}
+                </div>
+                <div className='profile_footer'>
+                    <TextButton onClick={ handleLogoutClick }>Выход</TextButton>
                 </div>
             </div>}
 
