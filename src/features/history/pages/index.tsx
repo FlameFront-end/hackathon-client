@@ -1,6 +1,6 @@
 import { type FC, useState } from 'react'
 import { HistoryWrapper } from './History.styled.tsx'
-import { Header, PrimaryButton } from '@/features/kit'
+import { Header, PinkButton } from '@/features/kit'
 import { useGetAllHistoryQuery, useGetHistoryByUserIdQuery } from '../api/history.api.ts'
 import List from '../components/List'
 import { useAppSelector } from '@/hooks'
@@ -17,9 +17,9 @@ const History: FC = () => {
     return (
         <HistoryWrapper>
             <Header subheading='Геоданные и измерения' />
-            {userId ? <PrimaryButton onClick={() => { setShowAll((prevState) => !prevState) }}>
+            {userId ? <PinkButton className='show' onClick={() => { setShowAll((prevState) => !prevState) }}>
                 {showAll ? 'Показать мою историю' : 'Показать историю всех пользователь'}
-            </PrimaryButton> : null}
+            </PinkButton> : null}
 
             {showAll ? <>{!isFetching ? <>
                 {allHistory && <div className='history'>

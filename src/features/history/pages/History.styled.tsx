@@ -1,8 +1,15 @@
 import styled from 'styled-components'
 
 export const HistoryWrapper = styled.div`   
-    padding-bottom: 100px;
+    padding-bottom: 130px;
+    position: relative;
     
+    .show {
+        position: fixed;
+        right: 20px;
+        bottom: 100px;
+        z-index: 1000;
+    }
     
     div {
         font-family: "Comfortaa", sans-serif;
