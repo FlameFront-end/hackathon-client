@@ -99,7 +99,7 @@ const SpeedometerCanvas: FC<Props> = ({ value, check, isTesting }) => {
         const canvas = canvasRef.current
         if (canvas) {
             const ctx = canvas.getContext('2d')
-            if (ctx) {
+            if (ctx && value <= 100) {
                 if (animationRef.current) cancelAnimationFrame(animationRef.current)
                 animate(ctx, value)
             }
