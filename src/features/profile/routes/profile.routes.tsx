@@ -1,5 +1,5 @@
 import { profilePaths } from './profile.paths.ts'
-import Profile from '../pages'
+import Profile from '../pages/Profile'
 
 export const profileRoutes = [
     {

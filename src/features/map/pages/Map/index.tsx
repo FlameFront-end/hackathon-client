@@ -6,6 +6,9 @@ import { useGeoLocation } from '@/hooks'
 import { useGetAllHistoryQuery } from '../../../history/api/history.api.ts'
 import InfoModal from '../../components/InfoModal'
 
+import svg1 from '../../../../../public/person-mark.svg'
+import svg2 from '../../../../../public/mark.svg'
+
 const calculateDistance = (coords1: [number, number], coords2: [number, number]): number => {
     const toRad = (value: number): number => value * Math.PI / 180
 
@@ -116,7 +119,7 @@ const Map: FC = () => {
                         options={{
                             balloonCloseButton: true,
                             hideIconOnBalloonOpen: false,
-                            iconImageHref: '../../../../../public/person-mark.svg',
+                            iconImageHref: svg1,
                             iconLayout: 'default#image',
                             iconImageSize: [30, 42],
                             iconImageOffset: [-3, -42]
@@ -139,7 +142,7 @@ const Map: FC = () => {
                             options={{
                                 balloonCloseButton: true,
                                 hideIconOnBalloonOpen: false,
-                                iconImageHref: '../../../../../public/mark.svg',
+                                iconImageHref: svg2,
                                 iconLayout: 'default#image',
                                 iconImageSize: [30, 42],
                                 iconImageOffset: [-3, -42]
