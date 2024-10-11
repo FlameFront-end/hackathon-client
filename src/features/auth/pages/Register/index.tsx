@@ -1,5 +1,4 @@
-import { type FC } from 'react'
-import { Button, Form, Input } from 'antd'
+import { type ChangeEvent, type FC, type FormEvent, useState } from 'react'
 import { useRegisterMutation } from '../../api/auth.api'
 import { regExpPassword } from '@/utils'
 import { useAppAction } from '@/hooks'
@@ -10,97 +9,105 @@ import TextButton from '../../../kit/components/Buttons/TextButton'
 import { authPaths } from '../../routes/auth.paths.ts'
 import Card from '../../../kit/components/Card'
 import { StyledAuthWrapper } from '../styled/Auth.styled.tsx'
+import { PinkButton } from '@/features/kit'
 
 const Register: FC = () => {
     const navigate = useNavigate()
     const { setUser } = useAppAction()
     const [register, { isLoading }] = useRegisterMutation()
-    const [form] = Form.useForm()
+    const [formValues, setFormValues] = useState({ email: '', nick: '', password: '' })
+    const [errors, setErrors] = useState<{ email?: string, nick?: string, password?: string }>({})
 
-    const handleFinish = async (payload: RegisterDataForm): Promise<void> => {
-        const response = await register(payload)
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    }
 
-        console.log('payload', payload)
+    const validateForm = (): boolean => {
+        const newErrors: { email?: string, nick?: string, password?: string } = {}
 
-        if (!('error' in response)) {
-            const result = response?.data
-            setUser(result)
-            navigate(pathsConfig.speed)
-            form.resetFields()
+        if (!formValues.email) {
+            newErrors.email = 'Пожалуйста, введите ваш email!'
+        } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
+            newErrors.email = 'Введённый email недействителен!'
+        }
+
+        if (!formValues.nick) {
+            newErrors.nick = 'Пожалуйста, введите свой никнейм!'
+        }
+
+        if (!formValues.password) {
+            newErrors.password = 'Пожалуйста, введите свой пароль!'
+        } else if (!regExpPassword.test(formValues.password)) {
+            newErrors.password = 'Пароль должен содержать не менее 9 символов и включать заглавные буквы, цифры и специальные символы, такие как "#@&".'
+        }
+
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const handleSubmit = async (e: FormEvent): Promise<void> => {
+        e.preventDefault()
+        if (validateForm()) {
+            const response = await register(formValues as RegisterDataForm)
+            if (!('error' in response)) {
+                setUser(response?.data)
+                navigate(pathsConfig.speed)
+                setFormValues({ email: '', nick: '', password: '' })
+            }
         }
     }
 
     return (
         <StyledAuthWrapper>
-            <Card className='card'>
-                <Form
-                    form={form}
-                    name='register'
-                    labelCol={{ span: 24 }}
-                    wrapperCol={{ span: 24 }}
-                    style={{ maxWidth: 400, margin: '0 auto' }}
-                    onFinish={(data: RegisterDataForm) => {
-                        void handleFinish(data)
-                    }}
-                    autoComplete='off'
-                >
-                    <Form.Item
-                        label='Электронная почта'
-                        name='email'
-                        hasFeedback
-                        validateDebounce={600}
-                        rules={[
-                            { required: true, message: 'Пожалуйста, введите свой адрес электронной почты!' },
-                            { type: 'email', message: 'Введенный адрес электронной почты неверен!' }
-                        ]}
-                    >
-                        <Input/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label='Никнейм'
-                        name='nick'
-                        hasFeedback
-                        validateDebounce={600}
-                        style={{ width: '100%' }}
-                        rules={[
-                            { required: true, message: 'Пожалуйста, введите свой никнейм!' }
-                        ]}
-                    >
-                        <Input style={{ width: '100%' }}/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label='Пароль'
-                        name='password'
-                        hasFeedback
-                        validateDebounce={600}
-                        rules={[
-                            { required: true },
-                            {
-                                validator: async (_, value) => {
-                                    if (value === undefined || value === '') {
-                                        await Promise.reject(new Error('Пожалуйста, введите свой пароль!'))
-                                    } else if (!regExpPassword.test(value)) {
-                                        await Promise.reject(new Error('Пароль должен содержать не менее 9 символов и состоять из заглавных букв, цифр и специальных символов, таких как "#@&".'))
-                                    }
-                                }
-                            }
-                        ]}
-                    >
-                        <Input.Password/>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Button type='primary' htmlType='submit' loading={isLoading} block>
-                        Зарегестрироваться
-                        </Button>
-                    </Form.Item>
-
-                    <label>
-                    Уже есть аккаунт? <TextButton onClick={() => { navigate(authPaths.login) }}>Вход</TextButton>
+            <Card className="card">
+                <h1 className="heading">Регистрация</h1>
+                <form onSubmit={handleSubmit} className='form'>
+                    <div className="form-item">
+                        <label htmlFor="email">Логин</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formValues.email}
+                            onChange={handleInputChange}
+                            placeholder="Введите e-mail"
+                        />
+                        {errors.email && <span className="error-message">{errors.email}</span>}
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="nick">Никнейм</label>
+                        <input
+                            id="nick"
+                            name="nick"
+                            type="text"
+                            value={formValues.nick}
+                            onChange={handleInputChange}
+                        />
+                        {errors.nick && <span className="error-message">{errors.nick}</span>}
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="password">Пароль</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={formValues.password}
+                            onChange={handleInputChange}
+                        />
+                        {errors.password && <span className="error-message">{errors.password}</span>}
+                    </div>
+                    <div className="form-item button">
+                        <PinkButton type="submit" disabled={isLoading}>
+                            {isLoading ? 'Loading...' : 'Зарегистрироваться'}
+                        </PinkButton>
+                    </div>
+                    <label className="link">
+                        Есть аккаунт?{' '}
+                        <TextButton onClick={() => {
+                            navigate(authPaths.login)
+                        }}>Войти</TextButton>
                     </label>
-                </Form>
+                </form>
             </Card>
         </StyledAuthWrapper>
     )
