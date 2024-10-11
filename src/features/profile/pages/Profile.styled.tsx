@@ -42,7 +42,8 @@ export const ProfileStyledWrapper = styled.div`
         font-size: 20px;
     }
     
-    .profile_btn{
-        font-size: 20px;
+    .qr-btn {
+        display: flex;
+        justify-content: start;
     }
 `

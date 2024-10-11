@@ -12,10 +12,6 @@ const InfoModal: FC = () => {
     const [visibleContent, setVisibleContent] = useState(false)
     return (
         <InfoModalStyledWrapper>
-            <PrimaryButton onClick={() => { setVisibleContent(prevState => !prevState) }}>
-                {!visibleContent ? 'Информация' : 'Закрыть'}
-            </PrimaryButton>
-
             {visibleContent && <ContentWrapper>
                 <SpeedInfo>
                     <ColorCircle color="black" />
@@ -34,6 +30,10 @@ const InfoModal: FC = () => {
                     <SpeedDescription>Отличный— скорость больше 50 Мбит/с</SpeedDescription>
                 </SpeedInfo>
             </ContentWrapper>}
+
+            <PrimaryButton onClick={() => { setVisibleContent(prevState => !prevState) }}>
+                {!visibleContent ? 'Информация' : 'Закрыть'}
+            </PrimaryButton>
         </InfoModalStyledWrapper>
     )
 }

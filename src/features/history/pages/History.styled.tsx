@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const HistoryWrapper = styled.div`   
+    padding-bottom: 100px;
+    
+    
     div {
         font-family: "Comfortaa", sans-serif;
         font-optical-sizing: auto;

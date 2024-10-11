@@ -17,6 +17,11 @@ export const authApi = api.injectEndpoints({
                 body: payload
             })
         }),
+        getProfile: builder.query<Collections.User, null>({
+            query: () => ({
+                url: '/auth/profile'
+            })
+        }),
         validateToken: builder.query<Promise<void>, string>({
             query: (token) => ({
                 url: `/user/validate-token/${token}`
@@ -28,5 +33,6 @@ export const authApi = api.injectEndpoints({
 export const {
     useLoginMutation,
     useRegisterMutation,
-    useValidateTokenQuery
+    useValidateTokenQuery,
+    useGetProfileQuery
 } = authApi

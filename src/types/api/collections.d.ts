@@ -7,6 +7,7 @@ declare namespace Collections {
         password: string
         updatedAt: string
         createdAt: string
+        histories: Collections.History[]
     }
 
     interface History {
