@@ -21,7 +21,6 @@ const useGeoLocation = (): Location => {
     })
 
     const onSuccess = (position: GeolocationPosition): void => {
-        console.log('position', position)
         setLocation({
             loaded: true,
             coordinates: {
@@ -50,8 +49,6 @@ const useGeoLocation = (): Location => {
             } as GeolocationPositionError)
             return
         }
-
-        console.log('yes')
         navigator.geolocation.getCurrentPosition(onSuccess, onError)
     }, [])
 

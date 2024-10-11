@@ -4,14 +4,35 @@ import { MapStyledWrapper } from '../Map.styled.tsx'
 import { YMaps, Map as Ymap, Placemark, Circle } from '@pbe/react-yandex-maps'
 import { useGeoLocation } from '@/hooks'
 import { useGetAllHistoryQuery } from '../../../history/api/history.api.ts'
-
-import '../../../../../public/vite.svg'
 import InfoModal from '../../components/InfoModal'
+
+const calculateDistance = (coords1: [number, number], coords2: [number, number]): number => {
+    const toRad = (value: number): number => value * Math.PI / 180
+
+    const lat1 = coords1[0]
+    const lon1 = coords1[1]
+    const lat2 = coords2[0]
+    const lon2 = coords2[1]
+
+    const R = 6371
+    const dLat = toRad(lat2 - lat1)
+    const dLon = toRad(lon2 - lon1)
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    const distance = R * c * 1000 // Расстояние в метрах
+
+    return distance
+}
 
 const Map: FC = () => {
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
     const [mapCenter, setMapCenter] = useState<[number, number]>([54.51, 36.26])
     const [zoom, setZoom] = useState<number>(13)
+    const [closestPoint, setClosestPoint] = useState<{ coordinates: [number, number], distance: number } | null>(null)
+    const [test, setTest] = useState(0)
 
     const { data: allHistory } = useGetAllHistoryQuery(null)
     const location = useGeoLocation()
@@ -37,6 +58,26 @@ const Map: FC = () => {
         ))
     )
 
+    console.log('userLocation', userLocation)
+
+    useEffect(() => {
+        if (userLocation && uniqueHistory?.length) {
+            let minDistance = Infinity
+            let nearestPoint = null
+
+            uniqueHistory.forEach((point) => {
+                const distance = calculateDistance(userLocation, [point.coordinates[0], point.coordinates[1]])
+                if (distance < minDistance) {
+                    minDistance = distance
+                    nearestPoint = { coordinates: point.coordinates, distance }
+                    setTest(point.uploadSpeed)
+                }
+            })
+
+            setClosestPoint(nearestPoint)
+        }
+    }, [userLocation, uniqueHistory?.length])
+
     const getCircleColor = (downloadSpeed: number, uploadSpeed: number): string => {
         const speed = Math.min(downloadSpeed, uploadSpeed)
 
@@ -55,7 +96,7 @@ const Map: FC = () => {
                     <SvgChartBar/>
                     <div className='text'>
                         <h3 className='title'>
-                            Мощность <span>-77 Дб</span>
+                            {test ? <span>Мощность <span>{test} Мбит/с</span></span> : <span>N/A</span>}
                         </h3>
                     </div>
                 </div>
@@ -63,12 +104,12 @@ const Map: FC = () => {
                     <SvgArrowsUpDownBlue/>
                     <div className='text'>
                         <h3 className='title'>
-                            До вышки <span>100 м</span>
+                          До близжайшей точки <span>{closestPoint ? `${(closestPoint.distance * 1000).toFixed(0)} м` : 'N/A'}</span>
                         </h3>
                     </div>
                 </div>
             </div>
-            <YMaps query={{ apikey: 'ee55b2db-9099-4f9f-bf10-d10079ebcb34' }} >
+            <YMaps query={{ apikey: 'ee55b2db-9099-4f9f-bf10-d10079ebcb34' }}>
                 <Ymap className='ymap' state={{ center: mapCenter, zoom }}>
                     {userLocation && <Placemark
                         geometry={userLocation}
@@ -89,8 +130,8 @@ const Map: FC = () => {
                             properties={{
                                 balloonContent: `
                                     <div>
-                                        <strong>Download:</strong> ${item.downloadSpeed} Mbps<br/>
-                                        <strong>Upload:</strong> ${item.uploadSpeed} Mbps<br/>
+                                        <strong>Загрузка:</strong> ${item.downloadSpeed} Мбит/с<br/>
+                                        <strong>Отдача:</strong> ${item.uploadSpeed} Мбит/с<br/>
                                     </div>
                                 `
                             }}
@@ -123,7 +164,7 @@ const Map: FC = () => {
             {userLocation !== null && (
                 <MainButton onClick={getMyLocation} isMain color="#279AED">
                     <SvgLocation />
-                        Где я?
+                Где я?
                 </MainButton>
             )}
         </MapStyledWrapper>
