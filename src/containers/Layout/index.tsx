@@ -1,19 +1,15 @@
 import { type FC } from 'react'
 import { Outlet } from 'react-router-dom'
-import { StyledContent, StyledLayout } from './Layout.styled.tsx'
+import { StyledLayout } from './Layout.styled.tsx'
+import { Content } from 'antd/es/layout/layout'
 
 const Layout: FC = () => {
     return (
-        <>
-            {/* <MainHeader/> */}
-            <StyledLayout hasSider>
-                {/* <Sider /> */}
-                <StyledContent>
-                    <Outlet />
-                </StyledContent>
-            </StyledLayout>
-        </>
-
+        <StyledLayout hasSider>
+            <Content>
+                <Outlet />
+            </Content>
+        </StyledLayout>
     )
 }
 
