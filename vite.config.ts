@@ -14,6 +14,7 @@ export default defineConfig({
       '@/entities': path.resolve(__dirname, './src/entities'),
       '@/utils': path.resolve(__dirname, './src/utils'),
       '@/hooks': path.resolve(__dirname, './src/hooks'),
+      '@/public': path.resolve(__dirname, './public'),
       '@/globalTypes': path.resolve(__dirname, './src/types/global.types.ts'),
       '@/pathsConfig': path.resolve(__dirname, './src/router/entities/paths.config.ts')
     }

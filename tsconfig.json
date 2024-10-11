@@ -29,6 +29,7 @@
       "@/hooks": ["hooks"],
       "@/store": ["store"],
       "@/entities": ["entities"],
+      "@/public": ["../public"],
       "@/globalTypes": ["types/global.types.ts"],
       "@/pathsConfig": ["router/entities/paths.config.ts"],
     }

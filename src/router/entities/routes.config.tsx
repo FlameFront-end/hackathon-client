@@ -6,6 +6,7 @@ import RouterProtect from '../RouterProtect.tsx'
 import { mapRoutes } from '../../features/map/routes/map.routes.tsx'
 import { speedRoutes } from '../../features/speed/routes/speed.routes.tsx'
 import { historyRoutes } from '../../features/history/routes/history.routes.tsx'
+import { profileRoutes } from '../../features/profile/routes/profile.routes.tsx'
 
 export const routesConfig = [
     {
@@ -19,7 +20,8 @@ export const routesConfig = [
                     ...speedRoutes,
                     ...authRoutes,
                     ...mapRoutes,
-                    ...historyRoutes
+                    ...historyRoutes,
+                    ...profileRoutes
                 ]
             }
         ]
