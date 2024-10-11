@@ -1,11 +1,10 @@
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { ConfigProvider } from 'antd'
+import { App, ConfigProvider } from 'antd'
 import { ThemeProvider } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 
 import RouterProvider from './router/RouterProvider'
-import { StyledApp } from './containers/Layout/Layout.styled.tsx'
 import { store } from './store/configureStore.ts'
 import { theme } from './core/theme.ts'
 import { antdTheme } from './core/antdTheme.ts'
@@ -26,10 +25,10 @@ root.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <ConfigProvider theme={antdTheme}>
-                <StyledApp>
+                <App>
                     <ToastContainer autoClose={2000} theme='dark'/>
                     <RouterProvider />
-                </StyledApp>
+                </App>
             </ConfigProvider>
         </ThemeProvider>
     </Provider>

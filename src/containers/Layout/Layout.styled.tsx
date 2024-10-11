@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { App, Layout } from 'antd'
+import { Layout } from 'antd'
 
 export const StyledLayout = styled(Layout)`
     min-height: calc(100vh - 50px);
@@ -8,11 +8,4 @@ export const StyledLayout = styled(Layout)`
     margin: 0 auto;
     padding-bottom: 16px;
     background-color: #292929;
-`
-
-export const StyledApp = styled(App)`
-
-`
-
-export const StyledContent = styled(Layout.Content)`
 `

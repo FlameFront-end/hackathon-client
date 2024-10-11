@@ -21,6 +21,7 @@ declare namespace Collections {
     interface CreateHistoryPayload {
         downloadSpeed: number
         uploadSpeed: number
+        coordinates: number[]
         userId?: number
     }
 }

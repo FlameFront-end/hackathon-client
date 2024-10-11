@@ -43,6 +43,7 @@ export const HistoryWrapper = styled.div`
     }
 
     .time {
+        margin-top: 5px;
         text-align: center;
         margin-top: 6px;
     }
