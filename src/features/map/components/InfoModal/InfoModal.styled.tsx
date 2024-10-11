@@ -1,10 +1,17 @@
 import styled from 'styled-components'
 
 export const InfoModalStyledWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
     position: absolute;
     top: 170px;
     right: 10px;
     z-index: 999;
+`
+
+export const ContentWrapper = styled.div`
     width: 400px;
     padding: 10px;
     background-color: white;

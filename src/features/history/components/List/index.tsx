@@ -30,7 +30,7 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
                     <Skeleton title={false} loading={isFetching}>
                         <AntdList.Item.Meta
                             avatar={<Avatar size='large' src='../../../../../public/avaProfileWhite.svg' />}
-                            title={item.userName}
+                            title={item.userName ?? 'Аноним'}
                             description={item.location}
                         />
                         <div className='block_result'>
