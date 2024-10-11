@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { pathsConfig } from '@/pathsConfig'
 
 import { useAppSelector } from '@/hooks'
-import { useAuth } from '../../../auth/hooks/useAuth.ts'
 import { TextButton } from '../Buttons'
 import Flex from '../Flex'
 import { HeaderStyledWrapper } from './Header.styled.tsx'
@@ -18,20 +17,14 @@ interface Props {
 
 const Header: FC<Props> = () => {
     const user = useAppSelector(state => state.auth.user)
-    const { logout } = useAuth()
 
     const navigate = useNavigate()
-
-    const handleLogoutClick = (): void => {
-        logout()
-    }
 
     return (
         <HeaderStyledWrapper>
             <h1 className="heading">АЛЁ, <br/> Калуга!</h1>
             {user?.isAuth ? <Flex>
-                <div className='subheading'>{user?.nick}</div>
-                <TextButton onClick={handleLogoutClick}>Выход <Avatar size='large' src={avaProfileWhite}/></TextButton>
+                <TextButton onClick={() => { navigate(pathsConfig.profile) }}>{user?.nick} <Avatar size='large' src={avaProfileWhite}/></TextButton>
             </Flex> : <TextButton onClick={() => { navigate(pathsConfig.login) }}>
                 Войти <Avatar size='large' src={avaProfileGold} alt='q'/>
             </TextButton>}
