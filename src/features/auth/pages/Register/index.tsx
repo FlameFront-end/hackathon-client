@@ -72,7 +72,7 @@ const Register: FC = () => {
                             onChange={handleInputChange}
                             placeholder="Введите e-mail"
                         />
-                        {errors.email && <span className="error-message">{errors.email}</span>}
+                        {errors.email && <div className="error-message">{errors.email}</div>}
                     </div>
                     <div className="form-item">
                         <label htmlFor="nick">Никнейм</label>
@@ -83,7 +83,7 @@ const Register: FC = () => {
                             value={formValues.nick}
                             onChange={handleInputChange}
                         />
-                        {errors.nick && <span className="error-message">{errors.nick}</span>}
+                        {errors.nick && <div className="error-message">{errors.nick}</div>}
                     </div>
                     <div className="form-item">
                         <label htmlFor="password">Пароль</label>

@@ -87,7 +87,7 @@ const Login: FC = () => {
                             onChange={handleInputChange}
                             placeholder='Введите e-mail'
                         />
-                        {errors.email && <span className="error-message">{errors.email}</span>}
+                        {errors.email && <div className="error-message">{errors.email}</div>}
                     </div>
                     <div className="form-item">
                         <label htmlFor="password">Пароль</label>
@@ -99,7 +99,7 @@ const Login: FC = () => {
                             onChange={handleInputChange}
                             placeholder='Введите пароль'
                         />
-                        {errors.password && <span className="error-message">{errors.password}</span>}
+                        {errors.password && <div className="error-message">{errors.password}</div>}
                     </div>
                     <div className="form-item button">
                         <PinkButton type="submit" disabled={isLoading}>

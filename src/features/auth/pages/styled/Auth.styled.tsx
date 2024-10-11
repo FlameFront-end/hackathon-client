@@ -16,6 +16,8 @@ export const StyledAuthWrapper = styled.div`
     }
     
     .card {
+        width: 100%;
+        max-width: 450px;
         padding: 30px 80px;
         background: #191919;
         border-radius: 20px;
@@ -26,6 +28,12 @@ export const StyledAuthWrapper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 15px;
+    }
+        
+    .error-message {
+        font-size: 16px;
+        text-align: center;
+        color: red;
     }
     
     .button {
