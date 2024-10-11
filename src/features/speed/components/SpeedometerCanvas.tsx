@@ -108,7 +108,7 @@ const SpeedometerCanvas: FC<Props> = ({ value, check, isTesting }) => {
 
     return (
         <div>
-            <canvas ref={canvasRef} width={400} height={400} />
+            <canvas ref={canvasRef} width={400} height={350} />
         </div>
     )
 }

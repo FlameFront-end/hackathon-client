@@ -24,7 +24,7 @@ const Login: FC = () => {
         const token = params.get('token')
 
         if (token) {
-            axios.get(`http://localhost:3000/auth/validate-token/${token}`)
+            axios.get(`https://hackathon-server-nest-production.up.railway.app/auth/validate-token/${token}`)
                 .then(response => {
                     toast.success('Успешный вход в аккаунт')
                     setUser(response.data)

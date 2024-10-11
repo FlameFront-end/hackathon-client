@@ -35,20 +35,20 @@ const Header: FC<Props> = () => {
                         {user.nick} <img src={avaWhite} alt=""/>
                     </Link>
                 </div>
-            </Flex> : {user?.isa ? <Flex>
-                <div className="subheading">
-                    <Link to={pathsConfig.login}>
-                        Войти <img src={avaProfileGold} alt='q'/>
-                    </Link>
-                </div>
+            </Flex> : <>
+                {user?.isAuth ? <Flex>
+                    <div className="subheading">
+                        <Link to={pathsConfig.login}>
+                            Войти <img src={avaProfileGold} alt='q'/>
+                        </Link>
+                    </div>
                 </Flex> : <TextButton onClick={handleLogoutClick}>
-                        Выход <img src={avaProfileWhite} alt='q'/>
-                    </TextButton>}
+                    Выход <img src={avaProfileWhite} alt='q'/>
+                </TextButton>}
+            </>
             }
         </HeaderStyledWrapper>
     )
 }
 
 export default Header
-
-

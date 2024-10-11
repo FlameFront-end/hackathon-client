@@ -6,8 +6,8 @@ export const InfoModalStyledWrapper = styled.div`
     gap: 10px;
     align-items: end;
     position: absolute;
-    top: 170px;
-    right: 10px;
+    bottom: 120px;
+    right: 30px;
     z-index: 999;
 `
 
