@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { ProfileStyledWrapper } from './Profile.styled.tsx'
-import { AvaProfile } from '@/public'
+import { Avatar } from 'antd'
+import avaProfile from '../../../../public/avaProfile.png'
 
 const Profile: FC = () => {
     // const { name, email, location, numberOfRecords } =
@@ -9,7 +10,7 @@ const Profile: FC = () => {
         <ProfileStyledWrapper>
             <div className='profile_header'>
                 <div className='header_avatar'>
-                    <AvaProfile/>
+                    <Avatar size='large' src={avaProfile}/>
                 </div>
                 <div className='header_name'>
                     <span>Имя пользователя </span> <br/>
