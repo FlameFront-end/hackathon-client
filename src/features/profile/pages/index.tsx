@@ -1,20 +1,18 @@
-import { type FC, useState } from 'react'
+import { type FC } from 'react'
 import { ProfileStyledWrapper } from './Profile.styled.tsx'
-import { Avatar, Modal } from 'antd'
+import { Avatar } from 'antd'
 import avaProfile from '../../../../public/avaProfileWhite.svg'
 import { useGetProfileQuery } from '../../auth/api/auth.api.ts'
 import { formatDate } from '@/utils'
-import { PinkButton } from '@/features/kit'
 import Cookies from 'js-cookie'
-import QRCode from 'react-qr-code'
+import QrCode from '../components/QrCode.tsx'
 
 const Profile: FC = () => {
     const { data: user, isFetching } = useGetProfileQuery(null)
-    const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
     const token = Cookies.get('token')
 
-    console.log('token', token)
+    console.log('user', user)
 
     return (
         <ProfileStyledWrapper>
@@ -41,26 +39,11 @@ const Profile: FC = () => {
                         <span>{user?.histories?.length}</span>
                     </div>
                 </div>
-                <div className='qr-btn'>
-                    <PinkButton onClick={() => { setIsModalVisible(true) }}>
-                        Поделиться <br/>
-                        профилем
-                    </PinkButton>
+                <div className="qr-btn">
+                    {token && <QrCode token={token}/>}
                 </div>
             </div>}
 
-            <Modal
-                open={isModalVisible}
-                onCancel={() => { setIsModalVisible(false) }}
-                footer={null}
-            >
-                {(token) && (
-                    <QRCode
-                        value={`https://hackathon-client-8fxp.vercel.app/auth/login?token=${token}`}
-                        size={120}
-                        viewBox={'0 0 120 120'} />
-                )}
-            </Modal>
         </ProfileStyledWrapper>
     )
 }

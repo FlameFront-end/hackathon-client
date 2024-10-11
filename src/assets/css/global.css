@@ -25,3 +25,12 @@ body {
   flex-direction: column;
   overflow-x: hidden;
 }
+
+.qr-code {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding-top: 30px;
+}
