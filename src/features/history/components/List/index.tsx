@@ -3,8 +3,6 @@ import { Avatar, List as AntdList, Skeleton } from 'antd'
 import { SvgArrowDown, SvgArrowUp } from '@/features/kit'
 import { formatDate } from '@/utils'
 
-import avaWhite from '../../../../../public/avaWhite.svg'
-
 interface DataType {
     location: string
     indicators: {
@@ -28,10 +26,10 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
             loading={false}
             dataSource={data}
             renderItem={(item) => (
-                <AntdList.Item>
-                    <Skeleton title={false} className='record' loading={isFetching}>
+                <AntdList.Item className='record'>
+                    <Skeleton title={false} loading={isFetching}>
                         <AntdList.Item.Meta
-                            avatar={<Avatar size='large' src={avaWhite} />}
+                            avatar={<Avatar size='large' src='../../../../../public/avaProfileWhite.svg' />}
                             title={item.userName}
                             description={item.location}
                         />
@@ -39,11 +37,17 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
                             <div className='results'>
                                 <div>
                                     <span><SvgArrowDown/> Загрузка</span>
-                                    {item.indicators.downloadSpeed} Мбит/с
+                                    <div className='info'>
+                                        {item.indicators.downloadSpeed}
+                                        <span id='Mb'> Мбит/с</span>
+                                    </div>
                                 </div>
                                 <div>
                                     <span><SvgArrowUp/> Отдача</span>
-                                    {item.indicators.uploadSpeed} Мбит/с
+                                    <div className='info'>
+                                        {item.indicators.uploadSpeed}
+                                        <span id='Mb'> Мбит/с</span>
+                                    </div>
                                 </div>
                             </div>
                             <div className='time'>
