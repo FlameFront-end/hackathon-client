@@ -1,7 +1,7 @@
 import { useState, useRef, type FC, useEffect } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
-import { Header, MainButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
+import { Header, PinkButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
 import SpeedometerCanvas from '../components/SpeedometerCanvas.tsx'
 import { Button, Modal } from 'antd'
 import {
@@ -120,8 +120,8 @@ const Speed: FC = () => {
                 <SpeedometerCanvas value={check === 'download' ? downloadSpeed : uploadSpeed} check={check} isTesting={isTesting} />
             </div>
             {isTesting
-                ? <MainButton className='btn_wrapper' onClick={handleFinish}>Остановить</MainButton>
-                : <MainButton className='btn_wrapper' onClick={handleStart}>Начать</MainButton>
+                ? <PinkButton className='btn_wrapper' onClick={handleFinish}>Остановить</PinkButton>
+                : <PinkButton className='btn_wrapper' onClick={handleStart}>Начать</PinkButton>
             }
 
             <Modal

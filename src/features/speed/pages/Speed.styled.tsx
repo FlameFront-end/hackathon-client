@@ -35,7 +35,7 @@ export const SpeedStyledWrapper = styled.div`
     }
 
     .speedometer {
-        margin-top: 35px;
+        margin-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -55,9 +55,10 @@ export const SpeedStyledWrapper = styled.div`
 
     .btn_wrapper {
         display: flex;
-        width: 100%;
+        width: max-content;
         justify-content: center;
         align-items: center;
+        margin-bottom: 20px;
 
         & button {
             padding: 20px 70px;

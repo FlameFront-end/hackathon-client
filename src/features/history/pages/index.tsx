@@ -4,6 +4,7 @@ import { Header, PrimaryButton } from '@/features/kit'
 import { useGetAllHistoryQuery, useGetHistoryByUserIdQuery } from '../api/history.api.ts'
 import List from '../components/List'
 import { useAppSelector } from '@/hooks'
+import { BeatLoader } from 'react-spinners'
 
 const History: FC = () => {
     const userId = useAppSelector(state => state.auth.user.id)
@@ -20,7 +21,7 @@ const History: FC = () => {
                 {showAll ? 'Показать мою историю' : 'Показать историю всех пользователь'}
             </PrimaryButton> : null}
 
-            {showAll ? <>
+            {showAll ? <>{!isFetching ? <>
                 {allHistory && <div className='history'>
                     <List isFetching={isFetching} data={allHistory.map((item) => ({
                         userName: item.user?.nick,
@@ -32,20 +33,25 @@ const History: FC = () => {
                         }
                     }))}/>
                 </div>}
-            </> : <>
-                {myHistory && <div className='history'>
-                    <List isFetching={isFetchingMyHistory} data={myHistory.map((item) => ({
-                        userName: item.user?.nick,
-                        coordinates: item.coordinates,
-                        time: item.createdAt,
-                        indicators: {
-                            downloadSpeed: item.downloadSpeed,
-                            uploadSpeed: item.uploadSpeed
-                        }
-                    }))}/>
+            </> : <div className='loader'>
+                <BeatLoader size='20px' color="#ffffff"/>
+            </div>}</>
+                : <> {!isFetchingMyHistory ? <>
+                    {myHistory && <div className="history">
+                        <List isFetching={isFetchingMyHistory} data={myHistory.map((item) => ({
+                            userName: item.user?.nick,
+                            coordinates: item.coordinates,
+                            time: item.createdAt,
+                            indicators: {
+                                downloadSpeed: item.downloadSpeed,
+                                uploadSpeed: item.uploadSpeed
+                            }
+                        }))}/>
+                    </div>}
+                </> : <div className="loader">
+                    <BeatLoader size="20px" color="#ffffff"/>
                 </div>}
-            </>
-            }
+                </>}
         </HistoryWrapper>
     )
 }

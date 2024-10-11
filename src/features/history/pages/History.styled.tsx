@@ -65,4 +65,12 @@ export const HistoryWrapper = styled.div`
     #Mb {
         font-size: 11px;
     }
+
+    .loader{
+        height: 60vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 `
