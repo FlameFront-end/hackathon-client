@@ -29,26 +29,18 @@ const Header: FC<Props> = () => {
             <Flex>
                 <h1 className="heading">АЛЁ, <br/> Калуга!</h1>
             </Flex>
-            {pathsConfig.profile ? <Flex>
-                <div className="subheading">
-                    <Link to={pathsConfig.profile}>
-                        {user.nick} <img src={avaWhite} alt=""/>
-                    </Link>
-                </div>
-            </Flex> : {user?.isa ? <Flex>
-                <div className="subheading">
-                    <Link to={pathsConfig.login}>
+
+            {user?.isAuth ? <Link to={pathsConfig.profile}>
+                {user.nick} <img src={avaWhite} alt=""/>
+            </Link>
+                : pathsConfig.profile
+                    ? <Link to={pathsConfig.login}>
                         Войти <img src={avaProfileGold} alt='q'/>
-                    </Link>
-                </div>
-                </Flex> : <TextButton onClick={handleLogoutClick}>
+                    </Link> : <TextButton onClick={handleLogoutClick}>
                         Выход <img src={avaProfileWhite} alt='q'/>
                     </TextButton>}
-            }
         </HeaderStyledWrapper>
     )
 }
 
 export default Header
-
-
