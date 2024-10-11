@@ -12,6 +12,10 @@ export const NavStyledWrapper = styled.nav`
     padding: 35px 0;
     overflow: hidden;
     background-color: #191919;
+    .content{
+        text-align: center;
+        font-family: 'Comfortaa', system-ui;
+    }
     
     .link {
         color: white; 

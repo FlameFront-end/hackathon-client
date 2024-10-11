@@ -8,6 +8,9 @@ import { useAuth } from '../../../auth/hooks/useAuth.ts'
 import { TextButton } from '../Buttons'
 import Flex from '../Flex'
 
+import avaProfileWhite from '../../../../../public/avaProfileWhite.svg'
+import avaProfileGold from '../../../../../public/avaProfileGold.svg'
+
 interface Props {
     subheading: string
 }
@@ -29,12 +32,15 @@ const Header: FC<Props> = () => {
                 <div className="subheading">
                     <Link to={pathsConfig.profile}>Profile</Link>
                 </div>
-
                 <TextButton onClick={handleLogoutClick}>
-                  Выход
+                    Выход
+                    <img src={avaProfileWhite} alt='q'/>
                 </TextButton>
             </Flex> : <div className="subheading">
-                <Link to={pathsConfig.login}>Войти</Link>
+                <Link to={pathsConfig.login}>
+                    Войти
+                    <img src={avaProfileGold} alt='q'/>
+                </Link>
             </div>}
         </HeaderStyledWrapper>
     )
