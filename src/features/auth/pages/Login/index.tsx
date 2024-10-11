@@ -1,14 +1,12 @@
-import { type FC, useEffect } from 'react'
+import { type ChangeEvent, type FC, type FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { Button, Form, Input } from 'antd'
 
 import type { LoginPayload } from '../../types/login.types'
-
 import { regExpPassword } from '@/utils'
 import { useAppAction } from '@/hooks'
-import { TextButton, Card } from '@/features/kit'
+import { TextButton, Card, PinkButton } from '@/features/kit'
 import { useLoginMutation } from '../../api/auth.api'
 import { authPaths } from '../../routes/auth.paths.ts'
 
@@ -18,8 +16,8 @@ const Login: FC = () => {
     const navigate = useNavigate()
     const { setUser } = useAppAction()
     const [login, { isLoading }] = useLoginMutation()
-
-    const [form] = Form.useForm()
+    const [formValues, setFormValues] = useState({ email: '', password: '' })
+    const [errors, setErrors] = useState<{ email?: string, password?: string }>({})
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -37,83 +35,84 @@ const Login: FC = () => {
         }
     }, [])
 
-    const handleFinish = async (payload: LoginPayload): Promise<void> => {
-        const response = await login(payload)
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    }
 
-        if (!('error' in response)) {
-            const result = response?.data
-            setUser(result)
-            form.resetFields()
-            toast.success('Успешный вход в аккаунт')
-        } else {
-            toast.error('Что-то пошло не так')
+    const validateForm = (): boolean => {
+        const newErrors: { email?: string, password?: string } = {}
+
+        if (!formValues.email) {
+            newErrors.email = 'Пожалуйста, введите ваш email!'
+        } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
+            newErrors.email = 'Введённый email недействителен!'
+        }
+
+        if (!formValues.password) {
+            newErrors.password = 'Пожалуйста, введите ваш пароль!'
+        } else if (!regExpPassword.test(formValues.password)) {
+            newErrors.password = 'Пароль должен содержать не менее 9 символов и включать заглавные буквы, цифры и специальные символы, такие как "#@&".'
+        }
+
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const handleSubmit = async (e: FormEvent): Promise<void> => {
+        e.preventDefault()
+        if (validateForm()) {
+            const response = await login(formValues as LoginPayload)
+            if (!('error' in response)) {
+                setUser(response?.data)
+                setFormValues({ email: '', password: '' })
+                toast.success('Успешный вход в аккаунт')
+            } else {
+                toast.error('Что-то пошло не так')
+            }
         }
     }
 
     return (
         <StyledAuthWrapper>
-            <Card>
-                <Form
-                    form={form}
-                    name='login'
-                    labelCol={{ span: 24 }}
-                    wrapperCol={{ span: 24 }}
-                    style={{ maxWidth: 400, margin: '0 auto' }}
-                    onFinish={(data: LoginPayload) => {
-                        void handleFinish(data)
-                    }}
-                    autoComplete='off'
-                >
-                    <Form.Item
-                        className='form-item'
-                        label='Email'
-                        name='email'
-                        hasFeedback
-                        validateDebounce={600}
-                        rules={[
-                            { required: true, message: 'Please input your email!' },
-                            { type: 'email', message: 'The input is not valid email!' }
-                        ]}
-                    >
-                        <Input/>
-                    </Form.Item>
-                    <Form.Item
-                        label='Password'
-                        name='password'
-                        hasFeedback
-                        validateDebounce={600}
-                        rules={[
-                            {
-                                validator: async (_, value) => {
-                                    if (value === undefined || value === '') {
-                                        await Promise.reject(new Error('Please input your password!'))
-                                    } else if (!regExpPassword.test(value)) {
-                                        await Promise.reject(new Error('The password must be at least 9 characters and contain capital letters, numbers and special characters, such as "#@&".'))
-                                    }
-                                }
-                            }
-                        ]}
-                    >
-                        <Input.Password/>
-                    </Form.Item>
-
-                    {/* <AnimatedShowControl show={isError}> */}
-                    {/*    <Alert message={error?.message} type='error' showIcon/> */}
-                    {/* </AnimatedShowControl> */}
-
-                    <Form.Item>
-                        <Button type='primary' htmlType='submit' loading={isLoading} block>
-                            Войти
-                        </Button>
-                    </Form.Item>
-
-                    <label>
-                        Ещё не зарегстрированы? <TextButton onClick={() => { navigate(authPaths.register) }}>Регистрация</TextButton>
+            <Card className="card">
+                <h1 className='heading'>Войти</h1>
+                <form onSubmit={handleSubmit} className='form'>
+                    <div className="form-item">
+                        <label htmlFor="email">Логин</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formValues.email}
+                            onChange={handleInputChange}
+                            placeholder='Введите e-mail'
+                        />
+                        {errors.email && <span className="error-message">{errors.email}</span>}
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="password">Пароль</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={formValues.password}
+                            onChange={handleInputChange}
+                            placeholder='Введите пароль'
+                        />
+                        {errors.password && <span className="error-message">{errors.password}</span>}
+                    </div>
+                    <div className="form-item button">
+                        <PinkButton type="submit" disabled={isLoading}>
+                            {isLoading ? 'Загрузка...' : 'Войти'}
+                        </PinkButton>
+                    </div>
+                    <label className='link'>
+                        Нет аккаунта?{' '}
+                        <TextButton onClick={() => { navigate(authPaths.register) }}>Создать его</TextButton>
                     </label>
-                </Form>
+                </form>
             </Card>
         </StyledAuthWrapper>
-
     )
 }
 
