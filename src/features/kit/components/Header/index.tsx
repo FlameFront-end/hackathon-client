@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { pathsConfig } from '@/pathsConfig'
 
 import { useAppSelector } from '@/hooks'
@@ -10,7 +10,7 @@ import { HeaderStyledWrapper } from './Header.styled.tsx'
 
 import avaProfileWhite from '../../../../../public/avaProfileWhite.svg'
 import avaProfileGold from '../../../../../public/avaProfileGold.svg'
-import avaWhite from '../../../../../public/avaWhite.svg'
+import { Avatar } from 'antd'
 
 interface Props {
     subheading: string
@@ -20,31 +20,21 @@ const Header: FC<Props> = () => {
     const user = useAppSelector(state => state.auth.user)
     const { logout } = useAuth()
 
+    const navigate = useNavigate()
+
     const handleLogoutClick = (): void => {
         logout()
     }
 
     return (
         <HeaderStyledWrapper>
-            <Flex>
-                <h1 className="heading">АЛЁ, <br/> Калуга!</h1>
-            </Flex>
-            {pathsConfig.profile ? <Flex>
-                <div className="subheading">
-                    <Link to={pathsConfig.profile}>
-                        {user.nick} <img src={avaWhite} alt=""/>
-                    </Link>
-                </div>
-            </Flex> : {user?.isa ? <Flex>
-                <div className="subheading">
-                    <Link to={pathsConfig.login}>
-                        Войти <img src={avaProfileGold} alt='q'/>
-                    </Link>
-                </div>
-                </Flex> : <TextButton onClick={handleLogoutClick}>
-                        Выход <img src={avaProfileWhite} alt='q'/>
-                    </TextButton>}
-            }
+            <h1 className="heading">АЛЁ, <br/> Калуга!</h1>
+            {user?.isAuth ? <Flex>
+                <div className='subheading'>{user?.nick}</div>
+                <TextButton onClick={handleLogoutClick}>Выход <Avatar size='large' src={avaProfileWhite}/></TextButton>
+            </Flex> : <TextButton onClick={() => { navigate(pathsConfig.login) }}>
+                Войти <Avatar size='large' src={avaProfileGold} alt='q'/>
+            </TextButton>}
         </HeaderStyledWrapper>
     )
 }
