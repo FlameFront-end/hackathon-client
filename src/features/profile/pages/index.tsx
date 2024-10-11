@@ -44,10 +44,10 @@ const Profile: FC = () => {
                         <span>Дата регистрации:</span> <br/>
                         <span>{formatDate(user?.createdAt ?? '')}</span>
                     </div>
-                    <div className='body_numberOfRecords'>
-                        <span>Количество записей:</span> <br/>
-                        <span>{user?.histories?.length}</span>
-                    </div>
+                    {/* <div className='body_numberOfRecords'> */}
+                    {/*     <span>Количество записей:</span> <br/> */}
+                    {/*     <span>{user?.histories?.length}</span> */}
+                    {/* </div> */}
                 </div>
                 <div className="qr-btn">
                     {token && <QrCode token={token}/>}
