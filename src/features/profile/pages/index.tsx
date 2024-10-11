@@ -56,7 +56,7 @@ const Profile: FC = () => {
             >
                 {(token) && (
                     <QRCode
-                        value={`http://localhost:5173/auth/login?token=${token}`}
+                        value={`https://hackathon-client-8fxp.vercel.app/auth/login?token=${token}`}
                         size={120}
                         viewBox={'0 0 120 120'} />
                 )}
