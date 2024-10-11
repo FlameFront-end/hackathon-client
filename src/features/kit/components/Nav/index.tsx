@@ -1,9 +1,11 @@
 import { type FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { pathsConfig } from '@/pathsConfig'
 
 import { NavStyledWrapper } from './Nav.styled.tsx'
-import { SvgGeodata, SvgMap, SvgSpeed } from '../Svg'
-import { pathsConfig } from '@/pathsConfig'
+import Speed from '../../../../../public/speed.svg'
+import Map from '../../../../../public/map.svg'
+import History from '../../../../../public/history.svg'
 
 const Nav: FC = () => {
     const loc = useLocation()
@@ -15,7 +17,7 @@ const Nav: FC = () => {
                 data-type='speed'>
                 <div className='bg'></div>
                 <div className='content'>
-                    <SvgSpeed /> Скорость
+                    <img src={Speed} alt=""/> Скорость
                 </div>
             </Link>
 
@@ -23,7 +25,7 @@ const Nav: FC = () => {
                 data-type='map'>
                 <div className='bg'></div>
                 <div className='content'>
-                    <SvgMap />  Карта
+                    <img src={Map} alt=""/>  Карта
                 </div>
             </Link>
 
@@ -31,7 +33,7 @@ const Nav: FC = () => {
                 data-type='history'>
                 <div className='bg'></div>
                 <div className='content'>
-                    <SvgGeodata /> История
+                    <img src={History} alt=""/> История
                 </div>
             </Link>
         </NavStyledWrapper>
