@@ -5,7 +5,7 @@ export const StyledAuthWrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 40px;
-    height: 100vh;
+    height: calc(100vh - 20px);
     
     .heading {
         font-weight: 700;
