@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const ProfileStyledWrapper = styled.div`
-    width: 100vw;
     height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
@@ -18,8 +17,6 @@ export const ProfileStyledWrapper = styled.div`
     }
     
     .profile_container {
-        max-width: 1200px;
-        min-width: 420px;
         display: flex;
         flex-direction: column;
         gap: 10px;
