@@ -52,7 +52,6 @@ export const SpeedStyledWrapper = styled.div`
     .btn_wrapper {
         display: flex;
         width: 100%;
-        height: 150px;
         justify-content: center;
         align-items: center;
 

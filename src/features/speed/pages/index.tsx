@@ -4,7 +4,11 @@ import { SpeedStyledWrapper } from './Speed.styled.tsx'
 import { Header, MainButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
 import SpeedometerCanvas from '../components/SpeedometerCanvas.tsx'
 import { Button, Modal } from 'antd'
-import { useCreateHistoryMutation } from '../../history/api/history.api.ts'
+import {
+    useCreateHistoryMutation,
+    useGetAllHistoryQuery,
+    useGetHistoryByUserIdQuery
+} from '../../history/api/history.api.ts'
 import { toast } from 'react-toastify'
 import { useAppSelector, useGeoLocation } from '@/hooks'
 
@@ -23,6 +27,9 @@ const Speed: FC = () => {
     const [createHistory] = useCreateHistoryMutation()
     const userId = useAppSelector(state => state.auth.user.id)
     const location = useGeoLocation()
+
+    const { refetch: refetchAll } = useGetAllHistoryQuery(null)
+    const { refetch: refetchMy } = useGetHistoryByUserIdQuery(userId ?? 0)
 
     useEffect(() => {
         if (location.coordinates.lng && location.coordinates.lat) {
@@ -60,6 +67,8 @@ const Speed: FC = () => {
                 userId: userId ?? undefined
             }).then(() => {
                 toast.success('История успешно сохранена')
+                void refetchAll()
+                void refetchMy()
             })
 
             void handleFinish()

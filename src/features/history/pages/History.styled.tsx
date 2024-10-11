@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 
-export const HistoryWrapper = styled.div`
-    width: 100%;
-    height: 100%;
-
+export const HistoryWrapper = styled.div`   
     div {
         font-family: "Comfortaa", sans-serif;
         font-optical-sizing: auto;
@@ -17,6 +14,7 @@ export const HistoryWrapper = styled.div`
         justify-content: center;
         padding: 30px 20px;
     }
+    
 
     .record {
         height: 100%;
@@ -31,9 +29,10 @@ export const HistoryWrapper = styled.div`
         align-items: center;
         margin: auto;
     }
-    
+
     .ant-list {
         width: 100%;
+        max-width: 1000px;
     }
 
     .results {

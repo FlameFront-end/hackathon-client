@@ -21,7 +21,6 @@ interface ListProps {
 const List: FC<ListProps> = ({ data, isFetching }) => {
     return (
         <AntdList
-            className="listHistory"
             itemLayout="horizontal"
             loading={false}
             dataSource={data}
