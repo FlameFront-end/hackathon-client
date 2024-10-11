@@ -59,19 +59,16 @@ export const SpeedStyledWrapper = styled.div`
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
+        padding: 10px 50px;
 
         & button {
             padding: 20px 70px;
             text-align: center;
             font-size: 20px;
-            border-radius: 50px;
             border: 1px solid #686868;
             box-shadow: 0 0 2px 0 #3939396e;
             transition: 0.3s;
-
-            &:hover {
-                box-shadow: 0 0 10px 0 #686868;
-            }
+            
         }
     }
 `

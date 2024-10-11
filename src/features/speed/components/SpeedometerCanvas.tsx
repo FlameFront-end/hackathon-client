@@ -71,7 +71,7 @@ const SpeedometerCanvas: FC<Props> = ({ value, check, isTesting }) => {
         if (isTesting) {
             ctx.beginPath()
             ctx.fillStyle = 'white'
-            ctx.font = '32px Arial'
+            ctx.font = '32px Comfortaa'
             ctx.textAlign = 'center'
             ctx.textBaseline = 'middle'
             ctx.fillText(`${!Number.isNaN(Math.round(value)) ? Math.round(value) : 0} Мбит/с`, centerX, centerY - 15)
