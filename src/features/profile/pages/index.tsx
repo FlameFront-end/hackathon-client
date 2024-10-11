@@ -15,7 +15,6 @@ const Profile: FC = () => {
     const { data: user, isFetching } = useGetProfileQuery(null)
 
     const token = Cookies.get('token')
-    console.log('user', user)
 
     const { logout } = useAuth()
     const navigate = useNavigate()
@@ -26,7 +25,7 @@ const Profile: FC = () => {
 
     return (
         <ProfileStyledWrapper>
-            {!isFetching && <div className='profile_container'>
+            {!isFetching ? <div className='profile_container'>
                 <div className='profile_header'>
                     <div className='header_avatar'>
                         <Avatar size='large' src={avaProfile}/>
@@ -44,18 +43,15 @@ const Profile: FC = () => {
                         <span>Дата регистрации:</span> <br/>
                         <span>{formatDate(user?.createdAt ?? '')}</span>
                     </div>
-                    {/* <div className='body_numberOfRecords'> */}
-                    {/*     <span>Количество записей:</span> <br/> */}
-                    {/*     <span>{user?.histories?.length}</span> */}
-                    {/* </div> */}
                 </div>
                 <div className="qr-btn">
                     {token && <QrCode token={token}/>}
                 </div>
-                <div className='profile_footer'>
-                    <TextButton onClick={ handleLogoutClick }>Выход</TextButton>
-                </div>
-            </div>}
+            </div> : null}
+
+            <div className='profile_footer'>
+                <TextButton onClick={handleLogoutClick}>Выход</TextButton>
+            </div>
 
         </ProfileStyledWrapper>
     )

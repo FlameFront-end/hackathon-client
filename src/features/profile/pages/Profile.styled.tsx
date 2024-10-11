@@ -2,10 +2,11 @@ import styled from 'styled-components'
 
 export const ProfileStyledWrapper = styled.div`
     width: 100vw;
-    height: 100%;
+    height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: 15px;
     color: white;
     
@@ -44,7 +45,7 @@ export const ProfileStyledWrapper = styled.div`
     
     .qr-btn {
         display: flex;
-        justify-content: start;
+        justify-content: center;
     }
     
     .profile_footer{
