@@ -7,7 +7,6 @@ import { TextButton } from '../Buttons'
 import Flex from '../Flex'
 import { HeaderStyledWrapper } from './Header.styled.tsx'
 
-import avaProfileWhite from '../../../../../public/avaProfileWhite.svg'
 import avaProfileGold from '../../../../../public/avaProfileGold.svg'
 import { Avatar } from 'antd'
 
@@ -24,7 +23,7 @@ const Header: FC<Props> = () => {
         <HeaderStyledWrapper>
             <h1 className="heading">АЛЁ, <br/> Калуга!</h1>
             {user?.isAuth ? <Flex>
-                <TextButton onClick={() => { navigate(pathsConfig.profile) }}>{user?.nick} <Avatar size='large' src={avaProfileWhite}/></TextButton>
+                <TextButton onClick={() => { navigate(pathsConfig.profile) }}>{user?.nick} <Avatar size='large' src={avaProfileGold}/></TextButton>
             </Flex> : <TextButton onClick={() => { navigate(pathsConfig.login) }}>
                 Войти <Avatar size='large' src={avaProfileGold} alt='q'/>
             </TextButton>}
