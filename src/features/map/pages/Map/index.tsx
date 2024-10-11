@@ -2,14 +2,15 @@ import { type FC, useEffect, useState } from 'react'
 import { Header, MainButton, SvgArrowsUpDownBlue, SvgChartBar, SvgLocation } from '@/features/kit'
 import { MapStyledWrapper } from '../Map.styled.tsx'
 import { YMaps, Map as Ymap, Placemark, Circle } from '@pbe/react-yandex-maps'
-import fakeData from '../../data/data.ts'
 import { useGeoLocation } from '@/hooks'
+import { useGetAllHistoryQuery } from '../../../history/api/history.api.ts'
 
 const Map: FC = () => {
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
     const [mapCenter, setMapCenter] = useState<[number, number]>([54.51, 36.26])
     const [zoom, setZoom] = useState<number>(13)
 
+    const { data: allHistory } = useGetAllHistoryQuery(null)
     const location = useGeoLocation()
 
     useEffect(() => {
@@ -25,6 +26,26 @@ const Map: FC = () => {
             setMapCenter(userLocation)
             setZoom(15)
         }
+    }
+
+    const uniqueHistory = allHistory?.filter((item, index, self) =>
+        index === self.findIndex(t => (
+            t.coordinates[0] === item.coordinates[0] && t.coordinates[1] === item.coordinates[1]
+        ))
+    )
+
+    // Чёрный (очень низкий) — скорость меньше 5 Мбит/с.
+    // Красный (низкий) — скорость от 5 до 20 Мбит/с.
+    // Жёлтый (средний) — скорость от 20 до 50 Мбит/с.
+    // Зелёный (отличный) — скорость больше 50 Мбит/с.
+
+    const getCircleColor = (downloadSpeed: number, uploadSpeed: number): string => {
+        const speed = Math.min(downloadSpeed, uploadSpeed)
+
+        if (speed < 5) return '#000000' // чёрный
+        if (speed >= 5 && speed < 20) return '#FF0000' // красный
+        if (speed >= 20 && speed < 50) return '#FFFF00' // жёлтый
+        return '#00FF00' // зелёный
     }
 
     return (
@@ -52,7 +73,7 @@ const Map: FC = () => {
                 <Ymap className='ymap' state={{ center: mapCenter, zoom }}>
                     {userLocation && <Placemark geometry={userLocation} />}
 
-                    {fakeData.map((item, index) => (
+                    {allHistory?.map((item, index) => (
                         <Placemark
                             key={index}
                             geometry={item.coordinates}
@@ -61,7 +82,6 @@ const Map: FC = () => {
                                     <div>
                                         <strong>Download:</strong> ${item.downloadSpeed} Mbps<br/>
                                         <strong>Upload:</strong> ${item.uploadSpeed} Mbps<br/>
-                                        <strong>Ping:</strong> ${item.ping} ms
                                     </div>
                                 `
                             }}
@@ -76,19 +96,18 @@ const Map: FC = () => {
                         />
                     ))}
 
-                    {fakeData.map((item, index) => (
+                    {uniqueHistory?.map((item, index) => (
                         <Circle
                             key={index}
-                            geometry={[item.coordinates, 10000]}
+                            geometry={[item.coordinates, 1000]}
                             options={{
-                                fillColor: '#DB709377',
-                                strokeColor: '#990066',
+                                fillColor: `${getCircleColor(item.downloadSpeed, item.uploadSpeed)}77`,
+                                strokeColor: getCircleColor(item.downloadSpeed, item.uploadSpeed),
                                 strokeOpacity: 0.8,
-                                strokeWidth: 5
+                                strokeWidth: 3
                             }}
                         />
                     ))}
-
                 </Ymap>
             </YMaps>
             {userLocation !== null && (

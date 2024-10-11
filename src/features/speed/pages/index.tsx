@@ -1,4 +1,4 @@
-import { useState, useRef, type FC } from 'react'
+import { useState, useRef, type FC, useEffect } from 'react'
 import SpeedTest from '@cloudflare/speedtest'
 import { SpeedStyledWrapper } from './Speed.styled.tsx'
 import { Header, MainButton, SvgArrowDown, SvgArrowUp } from '@/features/kit'
@@ -6,6 +6,7 @@ import SpeedometerCanvas from '../components/SpeedometerCanvas.tsx'
 import { Button, Modal } from 'antd'
 import { useCreateHistoryMutation } from '../../history/api/history.api.ts'
 import { toast } from 'react-toastify'
+import { useAppSelector, useGeoLocation } from '@/hooks'
 
 const Speed: FC = () => {
     const [isTesting, setIsTesting] = useState<boolean>(false)
@@ -17,7 +18,17 @@ const Speed: FC = () => {
     const intervalDownloadId = useRef<number | null>(null)
     const intervalUploadId = useRef<number | null>(null)
 
+    const [coordinates, setCoordinates] = useState<[number, number]>([0, 0])
+
     const [createHistory] = useCreateHistoryMutation()
+    const userId = useAppSelector(state => state.auth.user.id)
+    const location = useGeoLocation()
+
+    useEffect(() => {
+        if (location.coordinates.lng && location.coordinates.lat) {
+            setCoordinates([location.coordinates.lat, location.coordinates.lng])
+        }
+    }, [location])
 
     const handleStart = async (): Promise<void> => {
         setIsTesting(true)
@@ -42,12 +53,11 @@ const Speed: FC = () => {
 
             speedTest.pause()
 
-            console.log('finalDownloadSpeed', finalDownloadSpeed)
-
             void createHistory({
                 downloadSpeed: finalDownloadSpeed,
                 uploadSpeed: finalUploadSpeed,
-                userId: 1
+                coordinates,
+                userId: userId ?? undefined
             }).then(() => {
                 toast.success('История успешно сохранена')
             })
