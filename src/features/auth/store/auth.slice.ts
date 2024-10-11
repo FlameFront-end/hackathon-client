@@ -7,20 +7,16 @@ interface AuthState {
         isAuth: boolean
         token: string | undefined | null
         id: number | undefined
-        ava: string | undefined
-        name: string | undefined
-        surname: string | undefined
-        patronymic: string | null | undefined
+        nick: string | undefined
+        email: string | undefined
     }
 }
 
 const user = JSON.parse(Cookies.get('user') ?? '{}') as {
     token?: string
     id?: number
-    ava?: string
-    name?: string
-    surname?: string
-    patronymic?: string | null
+    email?: string
+    nick?: string
 }
 
 const initialState: AuthState = {
@@ -28,10 +24,8 @@ const initialState: AuthState = {
         isAuth: user?.token != null,
         token: user?.token,
         id: user?.id,
-        ava: user?.ava,
-        name: user?.name,
-        surname: user?.surname,
-        patronymic: user?.patronymic
+        nick: user?.nick,
+        email: user?.email
     }
 }
 
@@ -54,11 +48,9 @@ export const authSlice = createSlice({
 
             state.user.token = null
             state.user.id = undefined
-            state.user.name = undefined
-            state.user.surname = undefined
-            state.user.patronymic = undefined
+            state.user.nick = undefined
+            state.user.email = undefined
             state.user.isAuth = false
-            state.user.ava = undefined
         }
     }
 })
