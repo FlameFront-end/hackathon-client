@@ -15,13 +15,17 @@ export const SpeedStyledWrapper = styled.div`
     }
 
     .title {
-        font-weight: 400;
         font-size: 14px;
+        font-family: "Comfortaa", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
     }
 
     .title span {
         color: #999;
         font-size: 14px;
+        
     }
 
     .num {

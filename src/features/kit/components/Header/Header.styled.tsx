@@ -4,11 +4,11 @@ export const HeaderStyledWrapper = styled.header`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 17px;
+    padding: 15px;
     background: rgba(34, 34, 34, 0.95);
     backdrop-filter: blur(6px);
    
-    a, h1 {
+    a, h1, button {
         color: white;
         text-decoration: none;
         font-size: 20px;
@@ -16,9 +16,11 @@ export const HeaderStyledWrapper = styled.header`
         font-optical-sizing: auto;
         font-weight: 700;
         font-style: normal;
+        
     }
     .heading {
         font-size: 24px;
+        text-align: center;
     }
     .subheading {
         display: flex;

@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
 export const MapStyledWrapper = styled.div`
-    .ymaps-2-1-79-inner-panes {
-        //filter: grayscale(1);
-    }
-    
     .top {
         display: flex;
         justify-content: space-evenly;
@@ -19,8 +15,11 @@ export const MapStyledWrapper = styled.div`
     }
 
     .title {
-        font-weight: 400;
         font-size: 14px;
+        font-family: "Comfortaa", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
     }
 
     .title span {
