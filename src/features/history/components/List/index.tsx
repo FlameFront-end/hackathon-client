@@ -3,6 +3,8 @@ import { Avatar, List as AntdList, Skeleton } from 'antd'
 import { SvgArrowDown, SvgArrowUp } from '@/features/kit'
 import { formatDate } from '@/utils'
 
+import avaWhite from '../../../../../public/avaWhite.svg'
+
 interface DataType {
     location: string
     indicators: {
@@ -29,7 +31,7 @@ const List: FC<ListProps> = ({ data, isFetching }) => {
                 <AntdList.Item>
                     <Skeleton title={false} className='record' loading={isFetching}>
                         <AntdList.Item.Meta
-                            avatar={<Avatar size='large' src='../../../../../public/ava.png' />}
+                            avatar={<Avatar size='large' src={avaWhite} />}
                             title={item.userName}
                             description={item.location}
                         />
