@@ -23,9 +23,10 @@ export const HeaderStyledWrapper = styled.header`
         
         a {
             font-size: 16px;
-            color: white;
-            text-decoration: none;
-            font-family: 'Comfortaa', system-ui;
+            font-family: 'Comfortaa', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
         }
     }
 `

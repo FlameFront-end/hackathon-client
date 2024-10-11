@@ -70,7 +70,6 @@ const Map: FC = () => {
                                 balloonCloseButton: true,
                                 hideIconOnBalloonOpen: false
                                 // iconLayout: 'default#image',
-                                // iconImageHref: '/pngwing.png',
                                 // iconImageSize: [30, 42],
                                 // iconImageOffset: [-3, -42]
                             }}

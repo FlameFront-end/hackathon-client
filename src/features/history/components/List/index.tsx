@@ -21,19 +21,19 @@ interface ListProps {
 const List: FC<ListProps> = ({ data, isFetching }) => {
     return (
         <AntdList
-            className="demo-loadmore-list"
+            className="listHistory"
             itemLayout="horizontal"
             loading={false}
             dataSource={data}
             renderItem={(item) => (
                 <AntdList.Item>
-                    <Skeleton title={false} loading={isFetching}>
+                    <Skeleton title={false} className='record' loading={isFetching}>
                         <AntdList.Item.Meta
                             avatar={<Avatar size='large' src='../../../../../public/ava.png' />}
                             title={item.userName}
                             description={item.location}
                         />
-                        <div>
+                        <div className='block_result'>
                             <div className='results'>
                                 <div>
                                     <span><SvgArrowDown/> Загрузка</span>
