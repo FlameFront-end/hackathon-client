@@ -5,6 +5,9 @@ import { YMaps, Map as Ymap, Placemark, Circle } from '@pbe/react-yandex-maps'
 import { useGeoLocation } from '@/hooks'
 import { useGetAllHistoryQuery } from '../../../history/api/history.api.ts'
 
+import '../../../../../public/vite.svg'
+import InfoModal from '../../components/InfoModal'
+
 const Map: FC = () => {
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
     const [mapCenter, setMapCenter] = useState<[number, number]>([54.51, 36.26])
@@ -34,22 +37,18 @@ const Map: FC = () => {
         ))
     )
 
-    // Чёрный (очень низкий) — скорость меньше 5 Мбит/с.
-    // Красный (низкий) — скорость от 5 до 20 Мбит/с.
-    // Жёлтый (средний) — скорость от 20 до 50 Мбит/с.
-    // Зелёный (отличный) — скорость больше 50 Мбит/с.
-
     const getCircleColor = (downloadSpeed: number, uploadSpeed: number): string => {
         const speed = Math.min(downloadSpeed, uploadSpeed)
 
-        if (speed < 5) return '#000000' // чёрный
-        if (speed >= 5 && speed < 20) return '#FF0000' // красный
-        if (speed >= 20 && speed < 50) return '#FFFF00' // жёлтый
-        return '#00FF00' // зелёный
+        if (speed < 5) return '#000000'
+        if (speed >= 5 && speed < 20) return '#FF0000'
+        if (speed >= 20 && speed < 50) return '#FFFF00'
+        return '#00FF00'
     }
 
     return (
-        <MapStyledWrapper>
+        <MapStyledWrapper style={{ position: 'relative' }}>
+            <InfoModal />
             <Header subheading="Карта качества связи"/>
             <div className='top'>
                 <div className='column'>
@@ -71,9 +70,19 @@ const Map: FC = () => {
             </div>
             <YMaps query={{ apikey: 'ee55b2db-9099-4f9f-bf10-d10079ebcb34' }} >
                 <Ymap className='ymap' state={{ center: mapCenter, zoom }}>
-                    {userLocation && <Placemark geometry={userLocation} />}
+                    {userLocation && <Placemark
+                        geometry={userLocation}
+                        options={{
+                            balloonCloseButton: true,
+                            hideIconOnBalloonOpen: false,
+                            iconImageHref: '../../../../../public/person-mark.svg',
+                            iconLayout: 'default#image',
+                            iconImageSize: [30, 42],
+                            iconImageOffset: [-3, -42]
+                        }}
+                    />}
 
-                    {allHistory?.map((item, index) => (
+                    {uniqueHistory?.map((item, index) => (
                         <Placemark
                             key={index}
                             geometry={item.coordinates}
@@ -88,10 +97,11 @@ const Map: FC = () => {
                             modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
                             options={{
                                 balloonCloseButton: true,
-                                hideIconOnBalloonOpen: false
-                                // iconLayout: 'default#image',
-                                // iconImageSize: [30, 42],
-                                // iconImageOffset: [-3, -42]
+                                hideIconOnBalloonOpen: false,
+                                iconImageHref: '../../../../../public/mark.svg',
+                                iconLayout: 'default#image',
+                                iconImageSize: [30, 42],
+                                iconImageOffset: [-3, -42]
                             }}
                         />
                     ))}
