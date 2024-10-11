@@ -65,4 +65,12 @@ export const ProfileStyledWrapper = styled.div`
             background: linear-gradient(90deg, rgba(235,84,206,1) 0%, rgba(123,70,189,1) 100%);
         }
     }
+    
+    .loader{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 `

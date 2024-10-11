@@ -10,6 +10,7 @@ import { TextButton } from '@/features/kit'
 import { useAuth } from '../../auth/hooks/useAuth.ts'
 import { pathsConfig } from '@/pathsConfig'
 import { useNavigate } from 'react-router-dom'
+import { BeatLoader } from 'react-spinners'
 
 const Profile: FC = () => {
     const { data: user, isFetching } = useGetProfileQuery(null)
@@ -47,7 +48,9 @@ const Profile: FC = () => {
                 <div className="qr-btn">
                     {token && <QrCode token={token}/>}
                 </div>
-            </div> : null}
+            </div> : <div className='loader'>
+                <BeatLoader size='20px' color="#ffffff"/>
+            </div>}
 
             <div className='profile_footer'>
                 <TextButton onClick={handleLogoutClick}>Выход</TextButton>
