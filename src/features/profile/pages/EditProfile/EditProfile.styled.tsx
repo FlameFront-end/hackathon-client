@@ -5,7 +5,6 @@ export const EditProfileStyledWrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 40px;
-    height: calc(100vh - 20px);
 
     .heading {
         font-weight: 700;
@@ -16,15 +15,22 @@ export const EditProfileStyledWrapper = styled.div`
     }
 
     .card {
+        height: 100%;
         width: 100%;
-        max-width: 450px;
-        padding: 30px 80px;
+        padding: 30px 30px;
         background: #191919;
         border-radius: 20px;
         border: none;
     }
 
     .form {
+        height: 100%;   
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .top {
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -41,6 +47,7 @@ export const EditProfileStyledWrapper = styled.div`
     }
 
     .form-item {
+        height: max-content;
         display: flex;
         flex-direction: column;
         gap: 10px;

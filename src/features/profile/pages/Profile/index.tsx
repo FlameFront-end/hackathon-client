@@ -6,11 +6,12 @@ import { useGetProfileQuery } from '../../../auth/api/auth.api.ts'
 import { formatDate } from '@/utils'
 import Cookies from 'js-cookie'
 import QrCode from '../../components/QrCode.tsx'
-import { TextButton } from '@/features/kit'
+import { Card, PinkButton } from '@/features/kit'
 import { useAuth } from '../../../auth/hooks/useAuth.ts'
 import { pathsConfig } from '@/pathsConfig'
 import { useNavigate } from 'react-router-dom'
 import { BeatLoader } from 'react-spinners'
+import EditProfile from '../EditProfile'
 
 const Profile: FC = () => {
     const { data: user, isFetching } = useGetProfileQuery(null)
@@ -25,38 +26,43 @@ const Profile: FC = () => {
     }
 
     return (
-        <ProfileStyledWrapper>
-            {!isFetching ? <div className='profile_container'>
-                <div className='profile_header'>
-                    <div className='header_avatar'>
-                        <Avatar size='large' src={avaProfile}/>
-                    </div>
-                    <div className='header_name'>
-                        <span>{user?.nick} </span>
-                    </div>
-                </div>
-                <div className='profile_body'>
-                    <div className='body_eamil'>
-                        <span>Электронная почта:</span> <br/>
-                        <span>{user?.email}</span>
-                    </div>
-                    <div className='body_registrationDate'>
-                        <span>Дата регистрации:</span> <br/>
-                        <span>{formatDate(user?.createdAt ?? '')}</span>
-                    </div>
-                </div>
-                <div className="qr-btn">
-                    {token && <QrCode token={token}/>}
-                </div>
-            </div> : <div className='loader'>
-                <BeatLoader size='20px' color="#ffffff"/>
-            </div>}
+        <div>
+            {/* <Header subheading="Профиль"/> */}
+            <ProfileStyledWrapper className='full'>
+                <Card className="card full info-card">
+                    {!isFetching ? <div className='profile_container'>
+                        <div className='profile_header'>
+                            <div className='header_avatar'>
+                                <Avatar size='large' src={avaProfile}/>
+                            </div>
+                            <div className='header_name'>
+                                <span>{user?.nick} </span>
+                            </div>
+                        </div>
+                        <div className='profile_body'>
+                            <div className='body_eamil'>
+                                <span>Электронная почта:</span> <br/>
+                                <span>{user?.email}</span>
+                            </div>
+                            <div className='body_registrationDate'>
+                                <span>Дата регистрации:</span> <br/>
+                                <span>{formatDate(user?.createdAt ?? '')}</span>
+                            </div>
+                        </div>
+                        <div className="qr-btn">
+                            {token && <QrCode token={token}/>}
+                        </div>
+                    </div> : <div className='loader'>
+                        <BeatLoader size='20px' color="#ffffff"/>
+                    </div>}
 
-            <div className='profile_footer'>
-                <TextButton onClick={handleLogoutClick}>Выход</TextButton>
-            </div>
-
-        </ProfileStyledWrapper>
+                    <div className='profile_footer'>
+                        <PinkButton onClick={handleLogoutClick}>Выход</PinkButton>
+                    </div>
+                </Card>
+                <EditProfile/>
+            </ProfileStyledWrapper>
+        </div>
     )
 }
 

@@ -2,13 +2,44 @@ import styled from 'styled-components'
 
 export const ProfileStyledWrapper = styled.div`
     height: calc(100vh - 100px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
     padding: 15px;
-    color: white;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    gap: 20px;
     
+    @media screen and (max-width: 700px){
+        display: flex;
+        flex-direction: column;
+    }
+    
+    * { color: #fff;}
+    
+
+    .full {
+        height: 100%;
+    }
+
+    .info-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+    .card {
+        width: 100%;
+        height: 100%;
+        padding: 30px 30px;
+        background: #191919;
+        border-radius: 20px;
+        border: none;
+    }
+
+
     span, button{
         font-family: "Comfortaa", sans-serif;
         font-optical-sizing: auto;
@@ -47,21 +78,10 @@ export const ProfileStyledWrapper = styled.div`
     }
     
     .profile_footer{
+        height: max-content;
         display: flex;
         align-items: center;
         justify-content: center;
-        & button {
-            border-radius: 10px;
-            width: 167px;
-            height: 40px;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            font-size: 20px;
-            border: none;
-            background: rgb(235,84,206);
-            background: linear-gradient(90deg, rgba(235,84,206,1) 0%, rgba(123,70,189,1) 100%);
-        }
     }
     
     .loader{

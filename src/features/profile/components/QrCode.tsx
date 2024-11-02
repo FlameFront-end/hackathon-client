@@ -10,7 +10,7 @@ const QrCode: FC<Props> = ({ token }) => {
 
     const size = 400
     const bgColor = 'ffffff'
-    const data = `https://hackathon-client-8fxp.vercel.app/auth/login?token=${token}`
+    const data = `https://client-coral-nine.vercel.app/auth/login?token=${token}`
 
     useEffect(() => {
         setQrCode(`http://api.qrserver.com/v1/create-qr-code/?data=${data}&size=${size}x${size}&bgcolor=${bgColor}`)
