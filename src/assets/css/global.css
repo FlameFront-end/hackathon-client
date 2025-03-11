@@ -1,40 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
-
-:root {
-  --head-size: 30px;
-  --subhead-size: 20px;
-  --base-size: 16px;
+* {
+  font-family: var(--font-Noto-Sans);
 }
 
-html {
+html, body {
   width: 100vw;
-  font-family: 'Noto Sans', sans-serif;
+  height: 100vh;
   font-size: var(--base-size);
   tab-size: 4;
-}
-
-* {
-  font-family: Noto Sans, sans-serif;
-}
-
-.profile-page {
-
-}
-
-body {
-  height: 100vh;
   color: white;
-  background: #292929;
+  background: var(--background-body);
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-}
-
-.qr-code {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
-  padding-top: 30px;
+  margin: 0;
+  padding: 0;
 }

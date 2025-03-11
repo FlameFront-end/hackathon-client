@@ -9,9 +9,5 @@ export const theme = {
     card: {
         background: '#222222',
         border: '#363738'
-    },
-    chat: {
-        selectBackground: '#4e7aca',
-        hoverBackground: '#333333'
     }
 }

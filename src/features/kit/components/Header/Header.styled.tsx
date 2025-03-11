@@ -12,11 +12,9 @@ export const HeaderStyledWrapper = styled.header`
         color: white;
         text-decoration: none;
         font-size: 20px;
-        font-family: 'Comfortaa', sans-serif;
         font-optical-sizing: auto;
         font-weight: 700;
         font-style: normal;
-
     }
     button:hover{
         text-decoration: none;

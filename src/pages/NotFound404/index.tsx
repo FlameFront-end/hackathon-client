@@ -1,7 +1,7 @@
 import { type FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Result, Button } from 'antd'
-import Flex from '../../features/kit/components/Flex'
+import { Flex } from '@/components'
 
 const NotFound404: FC = () => {
     const navigate = useNavigate()

@@ -12,7 +12,7 @@ interface Props {
 const Card: FC<Props> = ({ children, className }) => {
     return (
         <CardWrapper className={className}>
-            {children}
+            { children }
         </CardWrapper>
     )
 }

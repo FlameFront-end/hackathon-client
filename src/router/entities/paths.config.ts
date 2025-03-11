@@ -1,13 +1,11 @@
-import { authPaths } from '../../features/auth/routes/auth.paths.ts'
-import { mapPaths } from '../../features/map/routes/map.paths.ts'
-import { speedPaths } from '../../features/speed/routes/speed.paths.ts'
-import { historyPaths } from '../../features/history/routes/history.paths.ts'
-import { profilePaths } from '../../features/profile/routes/profile.paths.ts'
+import { HomPaths } from '../../features/hom/routes/hom.paths.ts'
+import { ClusterPaths } from '../../features/cluster/routes/cluster.paths.ts'
+import { ServicesPaths } from '../../features/services/routes/services.paths.ts'
+import { ContactsPaths } from '../../features/contacts/routes/contacts.paths.ts'
 
 export const pathsConfig = {
-    ...speedPaths,
-    ...authPaths,
-    ...mapPaths,
-    ...historyPaths,
-    ...profilePaths
+    ...HomPaths,
+    ...ClusterPaths,
+    ...ServicesPaths,
+    ...ContactsPaths
 }

@@ -3,9 +3,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { pathsConfig } from '@/pathsConfig'
 
 import { NavStyledWrapper } from './Nav.styled.tsx'
-import Speed from '../../../../../public/speed.svg'
-import Map from '../../../../../public/map.svg'
-import History from '../../../../../public/history.svg'
 
 const Nav: FC = () => {
     const loc = useLocation()
@@ -13,27 +10,31 @@ const Nav: FC = () => {
 
     return (
         <NavStyledWrapper>
-            <Link to={pathsConfig.speed} className={`link ${locName === '' ? 'active' : ''}`}
-                data-type='speed'>
-                <div className='bg'></div>
+            <Link to={pathsConfig.hom} className={`link ${locName === '' ? 'active' : ''}`}
+                data-type='hom'>
                 <div className='content'>
-                    <img src={Speed} alt=""/> Скорость
+                    hom
                 </div>
             </Link>
 
-            <Link to={pathsConfig.map} className={`link ${locName === 'map' ? 'active' : ''}`}
-                data-type='map'>
-                <div className='bg'></div>
+            <Link to={pathsConfig.cluster} className={`link ${locName === 'cluster' ? 'active' : ''}`}
+                data-type='cluster'>
                 <div className='content'>
-                    <img src={Map} alt=""/>  Карта
+                    cluster
                 </div>
             </Link>
 
-            <Link to={pathsConfig.history} className={`link ${locName === 'history' ? 'active' : ''}`}
-                data-type='history'>
-                <div className='bg'></div>
+            <Link to={pathsConfig.contacts} className={`link ${locName === 'contacts' ? 'active' : ''}`}
+                data-type='contacts'>
                 <div className='content'>
-                    <img src={History} alt=""/> История
+                    contacts
+                </div>
+            </Link>
+
+            <Link to={pathsConfig.services} className={`link ${locName === 'services' ? 'active' : ''}`}
+                data-type='services'>
+                <div className='content'>
+                    services
                 </div>
             </Link>
         </NavStyledWrapper>

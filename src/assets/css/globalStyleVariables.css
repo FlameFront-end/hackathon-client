@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+:root{
+    /*= Глобальный цвета, отступы, размеры, =*/
+    --background-body: #292929;
+    --background-header: rgba(34, 34, 34, 0.95);
+    --background-nav: #191919;
+
+    --head-size: 30px;
+    --subhead-size: 20px;
+    --base-size: 16px;
+
+    --font-Noto-Sans: 'Noto Sans', sans-serif;
+    --font-Comfortaa: 'Comfortaa', sans-serif;
+    --font-optical-sizing: auto;
+    --font-weight: 700;
+    --font-style: normal;
+
+
+    /*= Измерения =*/
+
+    /*= Карта =*/
+
+    /*= История =*/
+
+    /*= Профиль =*/
+    --color-heading: #fff;
+    --background-input: #d9d9d9;
+    --color-input: rgba(0, 0, 0, 0.6);
+    --color-link: rgba(255, 255, 255, 0.5);
+
+    --background-card: #191919;
+}
+
+* {
+    font-family: var(--font-Noto-Sans);
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    font-size: var(--base-size);
+    tab-size: 4;
+    color: white;
+    background: var(--background-body);
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}

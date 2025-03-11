@@ -7,5 +7,5 @@ export const StyledLayout = styled(Layout)`
     gap: 16px;
     margin: 0 auto;
     padding-bottom: 16px;
-    background-color: #292929;
+    background-color: var(--color-background);
 `
